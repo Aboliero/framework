@@ -11,8 +11,23 @@ class DemoController
     public $defaultActionName = 'hello';
     public function sortAction()
     {
-        $numbers = explode(' ', $_POST['numbers']);
-        sort($numbers);
+        $errors = [];
+        $numbers = str_replace(["\n", "\r"], ' ', $_POST['numbers']);
+        $numbers = explode(' ', $numbers);
+        $numbers = array_filter($numbers, function ($number) {
+            return $number != '';
+        });
+        if (!$numbers) {
+            $errors[] = 'Пустое поле!';
+        }
+        foreach ($numbers as $number) {
+            if (!is_numeric($number)) {
+                $errors[] = '"' . $number . '" не число!';
+            };
+        }
+        if (!$errors) {
+            sort($numbers);
+        }
         include 'views/demo/sort.php';
     }
 

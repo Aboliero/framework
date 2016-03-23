@@ -6,6 +6,7 @@
  * Time: 23:15
  */
 /** @var string[] $numbers */
+/** @var string[] $errors */
 
 ?>
 <form method="post">
@@ -13,5 +14,9 @@
     <button type="submit">Отправить</button>
 </form>
 <hr>
+<? if ($errors) {?>
+Произошли ошибки: <br>
+<?= join('<br>', $errors); ?>
+<? } else {?>
 <?= join(' ', $numbers) ?>
-
+<? } ?>
