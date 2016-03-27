@@ -17,6 +17,6 @@
 <? if ($errors) {?>
 Произошли ошибки: <br>
 <?= join('<br>', $errors); ?>
-<? } else {?>
+<? } elseif(isset($numbers)) {?>
 <?= join(' ', $numbers) ?>
 <? } ?>
