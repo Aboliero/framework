@@ -6,14 +6,18 @@
  * Date: 17.03.2016
  * Time: 0:49
  */
-class DemoController
+require_once 'Controller.php';
+
+class DemoController extends Controller
 {
-    public $defaultActionName = 'hello';
+    public $defaultActionName = 'hello'; // перегрузка св-ва controller::defaultactionname
     public function sortAction()
     {
+        $numbers = [];
         $errors = [];
-        if (isset($_POST['numbers'])) {
-            $numbers = str_replace(["\n", "\r"], ' ', $_POST['numbers']);
+        $strNumbers = $this->app->request->getParam('numbers');
+        if (isset($strNumbers)) {
+            $numbers = str_replace(["\n", "\r"], ' ', $strNumbers);
             $numbers = explode(' ', $numbers);
             $numbers = array_filter($numbers, function ($number) {
                 return $number != '';
@@ -30,23 +34,11 @@ class DemoController
                 sort($numbers);
             }
         }
-        include 'views/demo/sort.php';
+        $this->render('sort', ['numbers' => $numbers, 'errors' => $errors]);
     }
 
     public function helloAction()
     {
         echo 'Hello, World!';
-    }
-
-    public function execute($actionName = null)
-    {
-        if (is_null($actionName)) {
-            $actionName = $this->defaultActionName;
-        }
-        $methodName = $actionName . 'Action';
-        if (!method_exists($this, $methodName)) {
-            throw new exception('Нет такого действия!');
-        };
-        $this->$methodName();
     }
 }

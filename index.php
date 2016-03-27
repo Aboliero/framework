@@ -10,6 +10,9 @@
 //require_once -  для объявлений
 ini_set('display_errors', '1');
 header('Content-Type: text/html; charset=utf-8');
+require_once 'Request.php';
+$request = new Request();
+
 require_once 'UrlManager.php';
 $urlManager = new UrlManager();
 $route = $urlManager->getCurrentRout();
@@ -17,6 +20,7 @@ $route = $urlManager->getCurrentRout();
 
 require_once 'Application.php';
 $application = new Application();
+$application->request = $request;
 
 $controller = $application->getController($route->controllerName);
 $controller->execute($route->actionName);

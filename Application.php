@@ -9,6 +9,10 @@
 class Application
 {
     public $defaultControllerName = 'demo';
+    /**
+     * @var Request
+     */
+    public $request;
 
     /**
      * @param null $controllerName
@@ -27,6 +31,8 @@ class Application
         }
         require_once $fileName;
 
-        return new $className();
+        $controller = new $className();
+        $controller->app = $this;
+        return $controller;
     }
 }
