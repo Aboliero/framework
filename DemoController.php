@@ -6,7 +6,6 @@
  * Date: 17.03.2016
  * Time: 0:49
  */
-require_once 'Controller.php';
 
 class DemoController extends Controller
 {
@@ -15,7 +14,7 @@ class DemoController extends Controller
     {
         $numbers = [];
         $errors = [];
-        $strNumbers = $this->app->request->getParam('numbers');
+        $strNumbers = $this->app->request->numbers;
         if (isset($strNumbers)) {
             $numbers = str_replace(["\n", "\r"], ' ', $strNumbers);
             $numbers = explode(' ', $numbers);

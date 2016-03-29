@@ -13,7 +13,10 @@ class Application
      * @var Request
      */
     public $request;
-
+    /**
+     * @var Autoloader
+     */
+    public $autoloader;
     /**
      * @param null $controllerName
      * @return DemoController
@@ -25,11 +28,9 @@ class Application
             $controllerName = $this->defaultControllerName;
         }
         $className = ucfirst($controllerName) . 'Controller';
-        $fileName = $className . '.php';
-        if (!file_exists($fileName)) {
+        if (!$this->autoloader->doesExist($className)) {
             throw new Exception('Нет такого контроллера');
         }
-        require_once $fileName;
 
         $controller = new $className();
         $controller->app = $this;
