@@ -14,6 +14,10 @@ header('Content-Type: text/html; charset=utf-8');
 require_once 'Autoloader.php';
 $autoloader = new Autoloader();
 $autoloader->register();
+//$database = new Database();
+//$database->connect('buncha.ru', 'root', 'pi31415', 'Aboliero');
+//$queryData = $database->sendQuery('SELECT * FROM cities');
+//print_r($queryData);
 $request = new Request();
 
 
