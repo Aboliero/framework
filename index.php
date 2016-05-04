@@ -18,6 +18,10 @@ $autoloader->register();
 //$database->connect('buncha.ru', 'root', 'pi31415', 'Aboliero');
 //$queryData = $database->sendQuery('SELECT * FROM cities');
 //print_r($queryData);
+//$query = new Query();
+//echo $query->select(['cities.name as a', 'countries.name'])->from(['cities', 'countries'])->getText();
+
+
 $request = new Request();
 
 
