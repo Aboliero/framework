@@ -14,12 +14,16 @@ header('Content-Type: text/html; charset=utf-8');
 require_once 'Autoloader.php';
 $autoloader = new Autoloader();
 $autoloader->register();
-//$database = new Database();
-//$database->connect('buncha.ru', 'root', 'pi31415', 'Aboliero');
+$database = new Database();
+$database->connect('buncha.ru', 'root', 'pi31415', 'Aboliero');
 //$queryData = $database->sendQuery('SELECT * FROM cities');
+$query = new Query($database);
 //print_r($queryData);
-//$query = new Query();
-//echo $query->select(['cities.name as a', 'countries.name'])->from(['cities', 'countries'])->getText();
+echo $query
+    ->select(['cities.name as Cities', 'countries.name as Country'])
+    ->from(['cities', 'countries'])
+    ->where(['and', ['=', 'cities.id', 1], ['=', 'countries.id', 1]])
+    ->getText();
 
 
 $request = new Request();

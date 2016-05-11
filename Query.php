@@ -8,6 +8,7 @@
  */
 class Query
 {
+
     /**
      * @var string[]
      */
@@ -16,6 +17,15 @@ class Query
      * @var string[]
      */
     protected $from;
+    /**
+     * @var Database
+     */
+    protected $database;
+
+    /**
+     * @var array
+     */
+    protected $where;
 
     /**
      * @param $name string неэкранированное имя
@@ -78,7 +88,9 @@ class Query
 
     public function getText()
     {
-        return 'select ' . join(', ', $this->select) . ' from ' . join(', ', $this->from);
+        return 'select ' . join(', ', $this->select) 
+            . ' from ' . join(', ', $this->from)
+            . 'where' . $this->formatCondition($this->where);
     }
 
     /**
@@ -102,5 +114,29 @@ class Query
             throw new Exception('Неверный формат имени таблицы');
         }
         return $name;
+    }
+
+    public function __construct($database) // метод принимающий и укладывающий
+    {
+        $this->database = $database;
+    }
+
+    protected function formatCondition($condition)
+    {
+        switch ($condition[0]) {
+            case '=':
+                return $this->escapeName($condition[1]) . ' = ' . $this->database->connection->real_escape_string($condition[2]);
+            case 'and':
+                return join(' and ', array_map([$this, 'formatCondition'], array_slice($condition, 1)));
+        }
+        
+        throw new Exception('Неподдерживаемый оператор');
+    }
+
+    public function where($condition)
+    {
+        $this->where = $condition;
+        
+        return $this;
     }
 };
