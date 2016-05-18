@@ -28,32 +28,14 @@ class Query
     protected $where;
 
     /**
-     * @param $name string неэкранированное имя
-     * @return string экранированное имя
+     * @var array
      */
-    
-    protected function escapePartialName($name) // экранирование частей имени
-    {
-        if ($name !== '*') {
-            $name = str_replace('`', '``', $name);
-            $name = '`' . $name . '`';
-        }
+    protected $join = [];
 
-        return $name;
-    }
 
-    /**
-     * @param $name string неэкранированное имя
-     * @return string экранированное имя
-     */
-    protected function escapeName($name)
-    {
-        $names = explode('.', $name);
-        $names = array_map ([$this, 'escapePartialName'], $names); // синтаксис collable
-        $names = join('.', $names);
-        return $names;
 
-    }
+
+
 
     public function select($columnNames = '*')
     {
@@ -88,9 +70,12 @@ class Query
 
     public function getText()
     {
-        return 'select ' . join(', ', $this->select) 
+        return 'select ' . join(', ', $this->select)
             . ' from ' . join(', ', $this->from)
-            . 'where' . $this->formatCondition($this->where);
+            . join('', array_map(function ($array) {
+                return ' join ' . $this->escapeAliasedName($array[0]) . ' ON ' . $this->formatCondition($array[1]);
+            }, $this->join))
+            . ' where' . $this->formatCondition($this->where);
     }
 
     /**
@@ -107,9 +92,9 @@ class Query
         });
         $count = (count($parts));
         if ($count == 1) {
-            $name = $this->escapeName($parts[0]);
+            $name = Database::escapeName($parts[0]);
         } elseif ($count == 2) {
-            $name = $this->escapeName($parts[0]) . ' as ' . $this->escapeName($parts[1]);
+            $name = Database::escapeName($parts[0]) . ' as ' . Database::escapeName($parts[1]);
         } else {
             throw new Exception('Неверный формат имени таблицы');
         }
@@ -125,7 +110,10 @@ class Query
     {
         switch ($condition[0]) {
             case '=':
-                return $this->escapeName($condition[1]) . ' = ' . $this->database->connection->real_escape_string($condition[2]);
+                $second = $condition[2] instanceof DatabaseExpression
+                    ? $condition[2]->getEscapedValue()
+                    : ('\'' . $this->database->connection->real_escape_string($condition[2]) . '\'');
+                return Database::escapeName($condition[1]) . ' = ' . $second;
             case 'and':
                 return join(' and ', array_map([$this, 'formatCondition'], array_slice($condition, 1)));
         }
@@ -133,9 +121,24 @@ class Query
         throw new Exception('Неподдерживаемый оператор');
     }
 
-    public function where($condition)
+    public function where($condition)  // условия
     {
         $this->where = $condition;
+        
+        return $this;
+    }
+
+    public function getRows()
+    {
+        $query = $this->getText();
+        $result = $this->database->sendQuery($query);
+        
+        return $result;
+    }
+
+    public function join($tableName, $condition)
+    {
+        $this->join[] = [$tableName, $condition];
         
         return $this;
     }

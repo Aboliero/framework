@@ -46,4 +46,33 @@ class Database
         }
 
     }
+
+    /**
+     * @param $name string неэкранированное имя
+     * @return string экранированное имя
+     */
+
+    public static function escapePartialName($name) // экранирование частей имени
+    {
+        if ($name !== '*') {
+            $name = str_replace('`', '``', $name);
+            $name = '`' . $name . '`';
+        }
+
+        return $name;
+    }
+
+    /**
+     * @param $name string неэкранированное имя
+     * @return string экранированное имя
+     */
+    
+    public static function escapeName($name)
+    {
+        $names = explode('.', $name);
+        $names = array_map (['Database', 'escapePartialName'], $names); // синтаксис collable
+        $names = join('.', $names);
+        return $names;
+
+    }
 }

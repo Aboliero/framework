@@ -19,12 +19,14 @@ $database->connect('buncha.ru', 'root', 'pi31415', 'Aboliero');
 //$queryData = $database->sendQuery('SELECT * FROM cities');
 $query = new Query($database);
 //print_r($queryData);
-echo $query
+print_r($query
     ->select(['cities.name as Cities', 'countries.name as Country'])
-    ->from(['cities', 'countries'])
-    ->where(['and', ['=', 'cities.id', 1], ['=', 'countries.id', 1]])
-    ->getText();
-
+    ->from('cities')
+    ->join('countries', ['=', 'countries.id', new DatabaseFieldExpression('cities.countryId')])
+    ->where(['=', 'cities.name', 'Москва'])
+    ->getRows()
+);
+exit;
 
 $request = new Request();
 
