@@ -32,6 +32,16 @@ class Query
      */
     protected $join = [];
 
+    /**
+     * @var int
+     */
+    protected $limit;
+
+    /**
+     * @var int
+     */
+    protected $skip;
+
 
 
 
@@ -70,12 +80,27 @@ class Query
 
     public function getText()
     {
-        return 'select ' . join(', ', $this->select)
-            . ' from ' . join(', ', $this->from)
-            . join('', array_map(function ($array) {
-                return ' join ' . $this->escapeAliasedName($array[0]) . ' ON ' . $this->formatCondition($array[1]);
-            }, $this->join))
-            . ' where' . $this->formatCondition($this->where);
+        $selectBlock = 'select ' . join(', ', $this->select);
+        $fromBlock = $this->from ? ' from ' . join(', ', $this->from) : '';
+        $joinBlock = join('', array_map(function ($array) {
+            return ' join ' . $this->escapeAliasedName($array[0]) . ' ON ' . $this->formatCondition($array[1]);
+        }, $this->join));
+        $whereBlock = $this->where ? ' where' . $this->formatCondition($this->where) : '';
+
+        $limitBlock = '';
+
+        if (isset($this->limit) && is_null($this->skip)) {
+            $limitBlock = ' limit ' . $this->limit;
+        } elseif (isset($this->skip)) {
+            $limit = isset($this->limit) ? $this->limit : 4294967295; // 4294967295 - 32битная система, макс кол-во строк
+            $limitBlock = ' limit ' . $this->skip . ', ' . $limit;
+        }
+
+        return $selectBlock
+        . $fromBlock
+        . $joinBlock
+        . $whereBlock
+        . $limitBlock;
     }
 
     /**
@@ -140,6 +165,34 @@ class Query
     {
         $this->join[] = [$tableName, $condition];
         
+        return $this;
+    }
+
+    /**
+     * @param $limit int|float|string число возвращаемых рядов
+     * @return $this
+     */
+    public function limit($limit)
+    {
+        if (!is_numeric($limit)) {
+            throw new InvalidArgumentException('Не верный формат данных');
+        }
+            $this->limit = (int)$limit;
+
+        return $this;
+    }
+
+    /**
+     * @param $skip int|float|string число offset
+     * @return $this
+     */
+    public function skip($skip)
+    {
+        if (!is_numeric($skip)) {
+            throw new InvalidArgumentException('Не верный формат данных');
+        }
+        $this->skip = (int)$skip;
+
         return $this;
     }
 };
