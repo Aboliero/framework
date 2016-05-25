@@ -42,6 +42,11 @@ class Query
      */
     protected $skip;
 
+    /**
+     * @var string[]
+     */
+    protected $group = [];
+
 
 
 
@@ -95,11 +100,16 @@ class Query
             $limit = isset($this->limit) ? $this->limit : 4294967295; // 4294967295 - 32битная система, макс кол-во строк
             $limitBlock = ' limit ' . $this->skip . ', ' . $limit;
         }
+        
+        $groupBlock = $this->group ? ' group by ' . join(', ', array_map(function ($columnName) {
+            return Database::escapeName($columnName);
+        }, $this->group)) : '';
 
         return $selectBlock
         . $fromBlock
         . $joinBlock
         . $whereBlock
+        . $groupBlock
         . $limitBlock;
     }
 
@@ -193,6 +203,21 @@ class Query
         }
         $this->skip = (int)$skip;
 
+        return $this;
+    }
+
+    /**
+     * @param $columnNames string[]|string
+     * @return $this
+     */
+    public function group($columnNames)
+    {
+        if (is_string($columnNames))
+        {
+            $columnNames = [$columnNames];
+        }
+        $this->group = $columnNames;
+        
         return $this;
     }
 };

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4bcd97df-4a45-4ecf-a74d-1c8f40ee72ec" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Query.php" afterPath="$PROJECT_DIR$/Query.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
     </list>
@@ -37,10 +36,10 @@
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="462">
-              <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+              <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
               <folding>
                 <element signature="e#6#101#0#PHP" expanded="true" />
-                <marker date="1464205049249" expanded="true" signature="781:813" placeholder="SELECT *, (S... countries" />
+                <marker date="1464208884137" expanded="true" signature="794:826" placeholder="SELECT *, (S... countries" />
               </folding>
             </state>
           </provider>
@@ -49,8 +48,8 @@
       <file leaf-file-name="Query.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Query.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="518">
-              <caret line="103" column="5" selection-start-line="103" selection-start-column="5" selection-end-line="103" selection-end-column="5" />
+            <state relative-caret-position="455">
+              <caret line="104" column="53" selection-start-line="104" selection-start-column="53" selection-end-line="104" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -59,7 +58,7 @@
       <file leaf-file-name="Database.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Database.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1189">
+            <state relative-caret-position="560">
               <caret line="77" column="1" selection-start-line="77" selection-start-column="1" selection-end-line="77" selection-end-column="1" />
               <folding />
             </state>
@@ -292,12 +291,12 @@
       <workItem from="1462381086545" duration="10904000" />
       <workItem from="1462987264640" duration="10162000" />
       <workItem from="1463585156121" duration="11939000" />
-      <workItem from="1464197707041" duration="7527000" />
+      <workItem from="1464197707041" duration="10873000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56014000" />
+    <option name="totallyTimeSpent" value="59360000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -389,7 +388,7 @@
           <caret line="26" column="39" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
           <folding>
             <element signature="e#6#101#0#PHP" expanded="true" />
-            <marker date="1464205049249" expanded="true" signature="781:813" placeholder="SELECT *, (S... countries" />
+            <marker date="1464208884137" expanded="true" signature="794:826" placeholder="SELECT *, (S... countries" />
           </folding>
         </state>
       </provider>
@@ -466,7 +465,7 @@
           <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
           <folding>
             <element signature="e#6#101#0#PHP" expanded="true" />
-            <marker date="1464205049249" expanded="true" signature="781:813" placeholder="SELECT *, (S... countries" />
+            <marker date="1464208884137" expanded="true" signature="794:826" placeholder="SELECT *, (S... countries" />
           </folding>
         </state>
       </provider>
@@ -522,7 +521,7 @@
           <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
           <folding>
             <element signature="e#6#101#0#PHP" expanded="true" />
-            <marker date="1464205049249" expanded="true" signature="781:813" placeholder="SELECT *, (S... countries" />
+            <marker date="1464208884137" expanded="true" signature="794:826" placeholder="SELECT *, (S... countries" />
           </folding>
         </state>
       </provider>
@@ -557,7 +556,7 @@
           <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
           <folding>
             <element signature="e#6#101#0#PHP" expanded="true" />
-            <marker date="1464205049249" expanded="true" signature="781:813" placeholder="SELECT *, (S... countries" />
+            <marker date="1464208884137" expanded="true" signature="794:826" placeholder="SELECT *, (S... countries" />
           </folding>
         </state>
       </provider>
@@ -599,7 +598,7 @@
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
             <element signature="e#6#101#0#PHP" expanded="true" />
-            <marker date="1464205049249" expanded="true" signature="781:813" placeholder="SELECT *, (S... countries" />
+            <marker date="1464208884137" expanded="true" signature="794:826" placeholder="SELECT *, (S... countries" />
           </folding>
         </state>
       </provider>
@@ -700,6 +699,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/mysqli.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="585" column="20" selection-start-line="585" selection-start-column="20" selection-end-line="585" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="77" column="1" selection-start-line="77" selection-start-column="1" selection-end-line="77" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/DatabaseFieldExpression.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
@@ -716,26 +731,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Database.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1189">
-          <caret line="77" column="1" selection-start-line="77" selection-start-column="1" selection-end-line="77" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/mysqli.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="585" column="20" selection-start-line="585" selection-start-column="20" selection-end-line="585" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Query.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="518">
-          <caret line="103" column="5" selection-start-line="103" selection-start-column="5" selection-end-line="103" selection-end-column="5" />
+        <state relative-caret-position="455">
+          <caret line="104" column="53" selection-start-line="104" selection-start-column="53" selection-end-line="104" selection-end-column="53" />
           <folding />
         </state>
       </provider>
@@ -743,10 +742,10 @@
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="462">
-          <caret line="25" column="22" selection-start-line="25" selection-start-column="22" selection-end-line="25" selection-end-column="22" />
+          <caret line="25" column="34" selection-start-line="25" selection-start-column="34" selection-end-line="25" selection-end-column="34" />
           <folding>
             <element signature="e#6#101#0#PHP" expanded="true" />
-            <marker date="1464205049249" expanded="true" signature="781:813" placeholder="SELECT *, (S... countries" />
+            <marker date="1464208884137" expanded="true" signature="794:826" placeholder="SELECT *, (S... countries" />
           </folding>
         </state>
       </provider>
