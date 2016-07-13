@@ -51,7 +51,6 @@ class Database
      * @param $name string неэкранированное имя
      * @return string экранированное имя
      */
-
     public static function escapePartialName($name) // экранирование частей имени
     {
         if ($name !== '*') {
@@ -65,14 +64,24 @@ class Database
     /**
      * @param $name string неэкранированное имя
      * @return string экранированное имя
-     */
-    
+     */    
     public static function escapeName($name)
     {
         $names = explode('.', $name);
-        $names = array_map (['Database', 'escapePartialName'], $names); // синтаксис collable
+        $names = array_map ([static::class, 'escapePartialName'], $names); // синтаксис collable
         $names = join('.', $names);
+        
         return $names;
+    }
 
+    /**
+     * @param $name DatabaseExpression|string
+     * @return string
+     */
+    public static function escapeAnyName($name)
+    {
+        return $name instanceof DatabaseExpression
+            ? $name->getEscapedValue()
+            : static::escapeName($name);                
     }
 }

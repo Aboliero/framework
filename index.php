@@ -20,10 +20,11 @@ $database->connect('buncha.ru', 'root', 'pi31415', 'Aboliero');
 $query = new Query($database);
 //print_r($queryData);
 print_r($query
-    ->select(['cities.name as Cities', 'countries.name as Country'])
+    ->select(['cities.name as cities', 'countries.name as country'])
     ->from('cities')
     ->join('countries', ['=', 'countries.id', new DatabaseFieldExpression('cities.countryId')])
-    ->group('country', 'is_capital')
+    ->group(['country', 'isCapital'])
+    ->order(['country'])
     ->getRows()
 );
 exit;

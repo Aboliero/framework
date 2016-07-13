@@ -47,6 +47,11 @@ class Query
      */
     protected $group = [];
 
+    /**
+     * @var array
+     */
+    protected $order = [];
+
 
 
 
@@ -105,12 +110,25 @@ class Query
             return Database::escapeName($columnName);
         }, $this->group)) : '';
 
+        $orderBlock = $this->order ? ' order by ' . join(', ', array_map(function ($rule) {
+            if (is_array($rule)) {
+                $direction = $rule[1];
+                $columnName = Database::escapeAnyName($rule[0]);
+            } else {
+                $direction = 'ASC';
+                $columnName = Database::escapeAnyName($rule);
+            }
+
+            return $columnName . ' ' . $direction;
+            }, $this->order)) : '';
+
         return $selectBlock
-        . $fromBlock
-        . $joinBlock
-        . $whereBlock
-        . $groupBlock
-        . $limitBlock;
+            . $fromBlock
+            . $joinBlock
+            . $whereBlock
+            . $groupBlock
+            . $orderBlock
+            . $limitBlock;
     }
 
     /**
@@ -218,6 +236,17 @@ class Query
         }
         $this->group = $columnNames;
         
+        return $this;
+    }
+
+    /**
+     * @param $rules array
+     * @return $this
+     */
+    public function order($rules)
+    {
+        $this->order = $rules;
+
         return $this;
     }
 };
