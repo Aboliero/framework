@@ -52,10 +52,11 @@ class Query
      */
     protected $order = [];
 
-
-
-
-
+    
+    public function __construct($database) // метод принимающий и укладывающий
+    {
+        $this->database = $database;
+    }
 
     public function select($columnNames = '*')
     {
@@ -152,11 +153,6 @@ class Query
             throw new Exception('Неверный формат имени таблицы');
         }
         return $name;
-    }
-
-    public function __construct($database) // метод принимающий и укладывающий
-    {
-        $this->database = $database;
     }
 
     protected function formatCondition($condition)
