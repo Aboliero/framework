@@ -185,6 +185,16 @@ class Query
         return $result;
     }
 
+    public function getRow()
+    {
+        $rows = $this->getRows();
+        if (!$rows) {
+            return null;
+        }
+
+        return array_values($rows)[0];
+    }
+
     public function join($tableName, $condition)
     {
         $this->join[] = [$tableName, $condition];
