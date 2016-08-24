@@ -14,9 +14,11 @@
     <button type="submit">Отправить</button>
 </form>
 <hr>
-<? if ($errors) {?>
-Произошли ошибки: <br>
-<?= join('<br>', $errors); ?>
-<? } elseif(isset($numbers)) {?>
-<?= join(' ', $numbers) ?>
-<? } ?>
+<?php if ($errors) { ?>
+    Произошли ошибки: <br>
+    <?= join('<br>', $errors) ?>
+<?php } elseif (isset($numbers)) {?>
+    <?= join(' ', $numbers) ?>
+<?php } ?>
+<br>
+<a href="/city/list">Вернуться к списку городов</a>
