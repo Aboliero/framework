@@ -43,7 +43,9 @@ class CityController extends Controller
             $name = $this->app->db->connection->real_escape_string($_POST['name']);
             $population = $this->app->db->connection->real_escape_string($_POST['population']);
             $id = $this->app->db->connection->real_escape_string($_GET['id']);
-            $this->app->db->sendQuery("UPDATE cities SET name = '$name', population = '$population' WHERE id = '$id'");
+            $countryId = $this->app->db->connection->real_escape_string($_POST['countryId']);
+            $this->app->db->sendQuery("UPDATE cities SET name = '$name', population = '$population', countryId = '$countryId' WHERE id = '$id'");
+
             $isSaved = true;
         }
 
@@ -53,7 +55,11 @@ class CityController extends Controller
             throw new Exception('Не существует такого id города');
         }
 
-        $this->render('edit', ['city' => $city, 'isSaved' => $isSaved]);
+        $query = new Query($this->app->db);
+        $query->select(['name', 'id'])->from('countries');
+        $countries = $query->getRows();
+
+        $this->render('edit', ['city' => $city, 'isSaved' => $isSaved, 'countries' => $countries]);
     }
 
     /**
@@ -63,7 +69,7 @@ class CityController extends Controller
     public function getCity($id)
     {
         $query = new Query($this->app->db);
-        $query->select()->from('cities')->where(['=', 'id', $id]);
+        $query->select(['cities.*', 'countries.name countryName'])->from('cities')->join('countries', ['=', 'cities.countryId', new DatabaseFieldExpression('countries.id')])->where(['=', 'cities.id', $id]);
         $city = $query->getRow();
         
         return $city;
