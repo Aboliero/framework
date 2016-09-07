@@ -69,7 +69,11 @@ class CityController extends Controller
     public function getCity($id)
     {
         $query = new Query($this->app->db);
-        $query->select(['cities.*', 'countries.name countryName'])->from('cities')->join('countries', ['=', 'cities.countryId', new DatabaseFieldExpression('countries.id')])->where(['=', 'cities.id', $id]);
+        $query
+            ->select(['cities.*', 'countries.name countryName'])
+            ->from('cities')
+            ->leftJoin('countries', ['=', 'cities.countryId', new DatabaseFieldExpression('countries.id')])
+            ->where(['=', 'cities.id', $id]);
         $city = $query->getRow();
         
         return $city;

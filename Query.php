@@ -52,7 +52,20 @@ class Query
      */
     protected $order = [];
 
-    
+    /**
+     * @var array
+     */
+    protected $joinTypeMap = [
+        self::JOIN_INNER => 'INNER',
+        self::JOIN_LEFT => 'LEFT',
+        self::JOIN_RIGHT => 'RIGHT',
+    ];
+
+
+    const JOIN_INNER = 'inner';
+    const JOIN_LEFT = 'left';
+    const JOIN_RIGHT = 'right';
+
     public function __construct($database) // метод принимающий и укладывающий
     {
         $this->database = $database;
@@ -94,7 +107,9 @@ class Query
         $selectBlock = 'select ' . join(', ', $this->select);
         $fromBlock = $this->from ? ' from ' . join(', ', $this->from) : '';
         $joinBlock = join('', array_map(function ($array) {
-            return ' join ' . $this->escapeAliasedName($array[0]) . ' ON ' . $this->formatCondition($array[1]);
+            $sqlJoinType = $this->joinTypeMap[$array[2]];
+
+            return ' ' . $sqlJoinType . ' join ' . $this->escapeAliasedName($array[0]) . ' ON ' . $this->formatCondition($array[1]);
         }, $this->join));
         $whereBlock = $this->where ? ' where' . $this->formatCondition($this->where) : '';
 
@@ -197,12 +212,27 @@ class Query
 
     public function join($tableName, $condition)
     {
-        $this->join[] = [$tableName, $condition];
+        $this->join[] = [$tableName, $condition, self::JOIN_INNER];
         
         return $this;
     }
-    
-    
+
+
+    public function leftJoin($tableName, $condition)
+    {
+        $this->join[] = [$tableName, $condition, self::JOIN_LEFT];
+
+        return $this;
+    }
+
+    public function rightJoin($tableName, $condition)
+    {
+        $this->join[] = [$tableName, $condition, self::JOIN_RIGHT];
+
+        return $this;
+    }
+
+
 
     /**
      * @param $limit int|float|string число возвращаемых рядов
