@@ -39,6 +39,7 @@ class DemoController extends Controller
     public function helloAction()
     {
         echo 'Hello, World!';
-        ?> <br> <a href="/city/list">К списку городов</a> <?php
+        ?> <br> <br> <a href="/city/list">К списку городов</a> <?php
+        ?> <br> <br> <a href="/country/list">К списку стран</a> <?php
     }
 }

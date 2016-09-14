@@ -14,3 +14,6 @@
     <a href="/city/edit?id=<?= urlencode($city['id']) ?>"><small>Редактировать</small></a> <br>
 <br>
 <a href="/city/list">Вернуться к списку городов</a>
+<br>
+<br>
+<a href="/country/list">Перейти к списку стран</a>
