@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4bcd97df-4a45-4ecf-a74d-1c8f40ee72ec" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DemoController.php" afterPath="$PROJECT_DIR$/DemoController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CityController.php" afterPath="$PROJECT_DIR$/CityController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/city/edit.php" afterPath="$PROJECT_DIR$/views/city/edit.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/city/list.php" afterPath="$PROJECT_DIR$/views/city/list.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/city/view.php" afterPath="$PROJECT_DIR$/views/city/view.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/country/view.php" afterPath="$PROJECT_DIR$/views/country/view.php" />
     </list>
     <ignored path="Framework.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,8 +37,8 @@
       <file leaf-file-name="Query.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Query.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1331">
-              <caret line="199" column="23" selection-start-line="199" selection-start-column="23" selection-end-line="199" selection-end-column="23" />
+            <state relative-caret-position="228">
+              <caret line="194" column="24" selection-start-line="194" selection-start-column="24" selection-end-line="194" selection-end-column="24" />
               <folding>
                 <element signature="e#3590#3675#0#PHP" expanded="false" />
                 <element signature="n#escapeAliasedName#0;n#Query#0;n#!!top" expanded="false" />
@@ -50,13 +50,28 @@
       <file leaf-file-name="CityController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CityController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="29" selection-end-column="9" />
+            <state relative-caret-position="1742">
+              <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
               <folding>
-                <marker date="1473275818176" expanded="true" signature="1384:1483" placeholder="UPDATE citie... " />
-                <marker date="1473275818176" expanded="true" signature="1384:1487" placeholder="UPDATE citie... " />
-                <marker date="1473275818176" expanded="true" signature="1830:1928" placeholder="update citie... " />
-                <marker date="1473275818176" expanded="true" signature="1941:1998" placeholder="/** * @param... " />
+                <marker date="1473883107980" expanded="true" signature="1384:1483" placeholder="UPDATE citie... " />
+                <marker date="1473883107980" expanded="true" signature="1384:1487" placeholder="UPDATE citie... " />
+                <marker date="1473883107980" expanded="true" signature="1830:1928" placeholder="update citie... " />
+                <marker date="1473883107980" expanded="true" signature="1941:1998" placeholder="/** * @param... " />
+                <marker date="1473883107980" expanded="true" signature="2808:2901" placeholder="INSERT INTO `cities`... " />
+                <marker date="1473883107980" expanded="true" signature="2814:2901" placeholder="UPDATE citie... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/views/city/edit.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="546">
+              <caret line="33" column="51" selection-start-line="33" selection-start-column="51" selection-end-line="33" selection-end-column="51" />
+              <folding>
+                <element signature="e#6#84#0#PHP" expanded="true" />
+                <element signature="e#394#585#0#HTML" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -65,21 +80,9 @@
       <file leaf-file-name="CountryController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CountryController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="496">
-              <caret line="45" column="24" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="24" />
+            <state relative-caret-position="861">
+              <caret line="41" column="53" selection-start-line="41" selection-start-column="53" selection-end-line="41" selection-end-column="53" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="list.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/country/list.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="12" column="33" selection-start-line="12" selection-start-column="33" selection-end-line="12" selection-end-column="33" />
-              <folding>
-                <element signature="e#6#39#0#PHP" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -87,34 +90,10 @@
       <file leaf-file-name="list.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/city/list.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+            <state relative-caret-position="588">
+              <caret line="28" column="51" selection-start-line="28" selection-start-column="51" selection-end-line="28" selection-end-column="51" />
               <folding>
-                <element signature="e#6#37#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="view.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/views/country/view.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
-              <folding>
-                <element signature="e#6#38#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="view.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/city/view.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="18" column="10" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="50" />
-              <folding>
-                <element signature="e#6#35#0#PHP" expanded="true" />
+                <element signature="e#6#45#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -162,16 +141,16 @@
         <option value="$PROJECT_DIR$/City.php" />
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/views/demo/sort.php" />
-        <option value="$PROJECT_DIR$/views/city/edit.php" />
         <option value="$PROJECT_DIR$/Query.php" />
-        <option value="$PROJECT_DIR$/CityController.php" />
         <option value="$PROJECT_DIR$/views/countries/list.php" />
         <option value="$PROJECT_DIR$/views/country/list.php" />
         <option value="$PROJECT_DIR$/DemoController.php" />
-        <option value="$PROJECT_DIR$/views/city/list.php" />
         <option value="$PROJECT_DIR$/CountryController.php" />
-        <option value="$PROJECT_DIR$/views/city/view.php" />
         <option value="$PROJECT_DIR$/views/country/view.php" />
+        <option value="$PROJECT_DIR$/views/city/view.php" />
+        <option value="$PROJECT_DIR$/views/city/edit.php" />
+        <option value="$PROJECT_DIR$/CityController.php" />
+        <option value="$PROJECT_DIR$/views/city/list.php" />
       </list>
     </option>
   </component>
@@ -401,7 +380,7 @@
       <workItem from="1472054394539" duration="11165000" />
       <workItem from="1472625991844" duration="16287000" />
       <workItem from="1473264878739" duration="10848000" />
-      <workItem from="1473798095822" duration="10165000" />
+      <workItem from="1473798095822" duration="20347000" />
     </task>
     <task id="LOCAL-00001" summary="В классе Query добавлен метод order.&#10;В класс Database добавлен метод экранизации любого типа данных DatabaseExpression или массив.">
       <created>1468433345520</created>
@@ -428,7 +407,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="142468000" />
+    <option name="totallyTimeSpent" value="152650000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -440,7 +419,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17480719" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -501,7 +480,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="4" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -745,14 +724,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/mysqli.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="585" column="20" selection-start-line="585" selection-start-column="20" selection-end-line="585" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Database.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="567">
@@ -784,35 +755,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/city/edit.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="14" column="47" selection-start-line="14" selection-start-column="47" selection-end-line="14" selection-end-column="47" />
-          <folding>
-            <element signature="e#6#84#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Query.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1331">
-          <caret line="199" column="23" selection-start-line="199" selection-start-column="23" selection-end-line="199" selection-end-column="23" />
-          <folding>
-            <element signature="e#3590#3675#0#PHP" expanded="false" />
-            <element signature="n#escapeAliasedName#0;n#Query#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="756">
-          <caret line="36" column="35" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -837,12 +779,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/city/list.php">
+    <entry file="file://$PROJECT_DIR$/DatabaseFieldExpression.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+        <state relative-caret-position="168">
+          <caret line="8" column="30" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="36" column="35" selection-start-line="36" selection-start-column="35" selection-end-line="36" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Query.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="194" column="24" selection-start-line="194" selection-start-column="24" selection-end-line="194" selection-end-column="24" />
           <folding>
-            <element signature="e#6#37#0#PHP" expanded="true" />
+            <element signature="e#3590#3675#0#PHP" expanded="false" />
+            <element signature="n#escapeAliasedName#0;n#Query#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/city/view.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="18" column="50" selection-start-line="18" selection-start-column="50" selection-end-line="18" selection-end-column="50" />
+          <folding>
+            <element signature="e#6#35#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -857,51 +826,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DatabaseFieldExpression.php">
+    <entry file="file://$PROJECT_DIR$/views/country/view.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="30" selection-start-line="8" selection-start-column="30" selection-end-line="8" selection-end-column="56" />
-          <folding />
+        <state relative-caret-position="231">
+          <caret line="11" column="53" selection-start-line="11" selection-start-column="53" selection-end-line="11" selection-end-column="53" />
+          <folding>
+            <element signature="e#6#38#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CountryController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="496">
-          <caret line="45" column="24" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="24" />
+        <state relative-caret-position="861">
+          <caret line="41" column="53" selection-start-line="41" selection-start-column="53" selection-end-line="41" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/mysqli.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="95" column="11" selection-start-line="95" selection-start-column="11" selection-end-line="95" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CityController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="27" column="8" selection-start-line="27" selection-start-column="8" selection-end-line="29" selection-end-column="9" />
+        <state relative-caret-position="1742">
+          <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
           <folding>
-            <marker date="1473275818176" expanded="true" signature="1384:1483" placeholder="UPDATE citie... " />
-            <marker date="1473275818176" expanded="true" signature="1384:1487" placeholder="UPDATE citie... " />
-            <marker date="1473275818176" expanded="true" signature="1830:1928" placeholder="update citie... " />
-            <marker date="1473275818176" expanded="true" signature="1941:1998" placeholder="/** * @param... " />
+            <marker date="1473883107980" expanded="true" signature="1384:1483" placeholder="UPDATE citie... " />
+            <marker date="1473883107980" expanded="true" signature="1384:1487" placeholder="UPDATE citie... " />
+            <marker date="1473883107980" expanded="true" signature="1830:1928" placeholder="update citie... " />
+            <marker date="1473883107980" expanded="true" signature="1941:1998" placeholder="/** * @param... " />
+            <marker date="1473883107980" expanded="true" signature="2808:2901" placeholder="INSERT INTO `cities`... " />
+            <marker date="1473883107980" expanded="true" signature="2814:2901" placeholder="UPDATE citie... " />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/city/view.php">
+    <entry file="file://$PROJECT_DIR$/views/city/list.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="18" column="10" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="50" />
+        <state relative-caret-position="588">
+          <caret line="28" column="51" selection-start-line="28" selection-start-column="51" selection-end-line="28" selection-end-column="51" />
           <folding>
-            <element signature="e#6#35#0#PHP" expanded="true" />
+            <element signature="e#6#45#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/country/view.php">
+    <entry file="file://$PROJECT_DIR$/views/city/edit.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="10" column="25" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="25" />
+        <state relative-caret-position="546">
+          <caret line="33" column="51" selection-start-line="33" selection-start-column="51" selection-end-line="33" selection-end-column="51" />
           <folding>
-            <element signature="e#6#38#0#PHP" expanded="true" />
+            <element signature="e#6#84#0#PHP" expanded="true" />
+            <element signature="e#394#585#0#HTML" expanded="false" />
           </folding>
         </state>
       </provider>

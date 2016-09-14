@@ -78,4 +78,36 @@ class CityController extends Controller
         
         return $city;
     }
+
+    public function addAction()
+    {
+
+        if (isset($_POST['submit'])) {
+            $name = $this->app->db->connection->real_escape_string($_POST['name']);
+            $population = $this->app->db->connection->real_escape_string($_POST['population']);
+            $countryId = $this->app->db->connection->real_escape_string($_POST['countryId']);
+            $this->app->db->sendQuery("INSERT INTO `cities` SET name = '$name', population = '$population', countryId = '$countryId'");
+
+            $newId = $this->app->db->connection->insert_id;
+            header("Location: /city/list?addedCityId=$newId");
+
+            exit;
+        }
+
+        $city = [
+            'id' => null,
+            'name' => '',
+            'population' => null,
+            'isCapital' => null,
+            'creationDate' => null,
+            'unemploymentRate' => null,
+            'countryId' => '',
+        ];
+
+        $query = new Query($this->app->db);
+        $query->select(['name', 'id'])->from('countries');
+        $countries = $query->getRows();
+
+        $this->render('edit', ['city' => $city, 'isSaved' => false, 'countries' => $countries]);
+    }
 }

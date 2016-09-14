@@ -7,9 +7,9 @@
 Страна: "<?= htmlspecialchars($country['name']) ?>"<br>
 Площадь: <?= htmlspecialchars($country['area']) ?> км.кв.<br>
 Количество городов: <?= $country['citysum'] ?><br>
-Столица: "<?php if (is_null($country['capitalId'])) {?>
+Столица: "<?php if (is_null($country['capitalName'])) {?>
     <?= "Не указана";} ?>
-<?= htmlspecialchars($country['capitalId']) ?>"<br>
+<?= htmlspecialchars($country['capitalName']) ?>"<br>
 <br>
 <br>
 <a href="/city/edit?id=<?= urlencode($country['id']) ?>"><small>Редактировать</small></a> <br>
