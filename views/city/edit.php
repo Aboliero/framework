@@ -27,6 +27,7 @@
 </form>
 <?php if ($isSaved) { ?>
     <strong>Сохранено</strong> <br>
+    
 <? } ?>
     
 <br>

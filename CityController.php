@@ -89,7 +89,13 @@ class CityController extends Controller
             $this->app->db->sendQuery("INSERT INTO `cities` SET name = '$name', population = '$population', countryId = '$countryId'");
 
             $newId = $this->app->db->connection->insert_id;
-            header("Location: /city/list?addedCityId=$newId");
+
+            $this->app->flashMessages->add('
+                <strong>ВНЕМАНИЕ!!! ГОРАД ДАБАВЛИН!!!</strong> <br>
+                <a href="/city/edit?id=' . $newId . '">Редактировать новый город</a>
+            ');
+
+            header('Location: /city/list');
 
             exit;
         }
@@ -110,4 +116,35 @@ class CityController extends Controller
 
         $this->render('edit', ['city' => $city, 'isSaved' => false, 'countries' => $countries]);
     }
+
+
+    public function deleteAction()
+    {
+        $id = $_GET['id'];
+        $city = $this->getCity($id);
+        if (!$city) {
+            throw new Exception('ААА!!! ЖОСТЬ! ГОРАДА НЕТ!! ПИЗДА!');
+        }
+
+        if (isset($_POST['confirm'])) {
+            $delId = $this->app->db->connection->real_escape_string($id);
+            $this->app->db->sendQuery("DELETE FROM `cities` WHERE `id` = '$delId' ");
+
+            $name = $city['name'];
+            
+            
+            header('Location: /city/list?deletedCityName=' . urlencode($name));
+
+            exit;
+        }
+
+        if (isset($_POST['cancel'])) {
+            header('Location: /city/list');
+
+            exit;
+        }
+
+        $this->render('delete', ['city' => $city]);
+    }
+    
 }

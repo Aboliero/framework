@@ -17,15 +17,19 @@ $autoloader->register();
 $database = new Database();
 $database->connect('buncha.ru', 'root', 'pi31415', 'Aboliero');
 
+$session = new Session();
 $request = new Request();
+$flashMessages = new FlashMessage($session);
 
 $urlManager = new UrlManager();
 $route = $urlManager->getCurrentRout();
 
 $application = new Application();
+$application->session = $session;
 $application->request = $request;
 $application->autoloader = $autoloader;
 $application->db = $database;
+$application->flashMessages = $flashMessages;
 
 $controller = $application->getController($route->controllerName);
 $controller->execute($route->actionName);

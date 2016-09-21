@@ -17,7 +17,14 @@ class Application
      * @var Autoloader
      */
     public $autoloader;
-
+    /**
+     * @var Session
+     */
+    public $session;
+    /**
+     * @var FlashMessage
+     */
+    public $flashMessages;
     /**
      * @var Database
      */
