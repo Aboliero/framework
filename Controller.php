@@ -34,14 +34,30 @@ abstract class Controller // запрещает создание экземпл�
         return $controllerName;
     }
 
-    public function render($viewName, $data = [])
+    public function render($localViewName, $data = [])
     {
-        $__fileName = 'views/' . $this->getName() . '/' . $viewName . '.php';
+        $globalViewName = $this->getName() . '/' . $localViewName;
+
+        $content = $this->simpleRender($globalViewName, $data);
+
+        echo $this->simpleRender('layout', ['content' => $content]);
+    }
+
+    public function simpleRender($globalViewName, $data = [])
+    {
+        $__fileName = 'views/' . $globalViewName . '.php';
         if (!file_exists($__fileName)) {
             throw new Exception('Нет такого представления!');
         }
         extract($data);
 
+        ob_start();
         include $__fileName;
+
+        return ob_get_clean();
     }
+
+
 }
+
+//. $this->getName() . '/'

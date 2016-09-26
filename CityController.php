@@ -130,10 +130,9 @@ class CityController extends Controller
             $delId = $this->app->db->connection->real_escape_string($id);
             $this->app->db->sendQuery("DELETE FROM `cities` WHERE `id` = '$delId' ");
 
-            $name = $city['name'];
+            $this->app->flashMessages->add('ВНЕМАНИЕ!!! ГОРАД ' . $city['name'] . ' УДАЛЁН!!!</strong>');
             
-            
-            header('Location: /city/list?deletedCityName=' . urlencode($name));
+            header('Location: /city/list');
 
             exit;
         }
