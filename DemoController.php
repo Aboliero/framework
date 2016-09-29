@@ -27,7 +27,7 @@ class DemoController extends Controller
             foreach ($numbers as $number) {
                 if (!is_numeric($number)) {
                     $errors[] = '"' . $number . '" не число!';
-                };
+                }
             }
             if (!$errors) {
                 sort($numbers);

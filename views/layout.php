@@ -16,5 +16,5 @@
 <?php } ?>
 <?= $content ?>
 <hr>
-
-<a href="/contacts">Контакты - в разработке</a>
+<a href="/authentication/login">Войти на сайт</a>
+Контакты - в разработке
