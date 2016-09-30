@@ -19,7 +19,7 @@ class AuthenticationController extends Controller
 
             $query = new Query($this->app->db);
             $query
-                ->select()
+                ->select('id')
                 ->from('authentic')
                 ->where(['and', ['=', 'username', $username], ['=', 'password', $password]]);
             $authentic = $query->getRow();
@@ -27,8 +27,9 @@ class AuthenticationController extends Controller
             if (isset($authentic)) {
                 $this->app->session->isUserAuthenticated = true;
                 $this->app->flashMessages->add('Вы зашли под логином ' . $username);
+                $this->app->session->authenticatedUserId = $authentic['id'];
 
-                header('Location: /city/list');
+                header('Location: /');
 
                 exit;
             } else {
