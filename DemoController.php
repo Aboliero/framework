@@ -38,6 +38,6 @@ class DemoController extends Controller
 
     public function helloAction()
     {
-        $this->render('demo');
+        $this->render('hello');
     }
 }

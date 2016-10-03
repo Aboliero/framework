@@ -20,11 +20,20 @@ class Session
 
     public function __get($name)
     {
-        return $_SESSION[$name];
+        if (isset($_SESSION[$name])) {
+            return $_SESSION[$name];
+        } else {
+            return null;
+        }
     }
 
     public function __isset($name)
     {
         return isset($_SESSION[$name]);
+    }
+
+    public function __unset($name)
+    {
+        unset($_SESSION[$name]);
     }
 }

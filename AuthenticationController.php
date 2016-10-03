@@ -29,6 +29,7 @@ class AuthenticationController extends Controller
                 $this->app->flashMessages->add('Вы зашли под логином ' . $username);
                 $this->app->session->authenticatedUserId = $authentic['id'];
 
+
                 header('Location: /');
 
                 exit;
@@ -42,6 +43,12 @@ class AuthenticationController extends Controller
 
     public function logoutAction()
     {
-        
+        if ($this->app->session->isUserAuthenticated) {
+            unset($this->app->session->isUserAuthenticated);
+        } else {
+            $this->app->flashMessages->add("Вы не залогинены.");
+        }
+
+        header('Location: /');
     }
 }
