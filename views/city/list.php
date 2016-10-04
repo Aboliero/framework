@@ -15,15 +15,4 @@
     <a href="/city/delete?id=<?= urlencode($city['id']) ?>"><small>Удалить</small></a> <br>
 <?php } ?>
 <br> <br>
-<br>
-<br>
-<br> <a href="/country/list">К списку стран</a>
-<br>
-<br>
-<a href="/"><b>На главную</b></a>
-<br>
-<br>
-<br>
-<br>
-<br>
 <a href="/city/add"><b>Добавить новый город</b></a>

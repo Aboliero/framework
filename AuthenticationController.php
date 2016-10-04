@@ -51,4 +51,45 @@ class AuthenticationController extends Controller
 
         header('Location: /');
     }
+
+    public function profileAction()
+    {
+        if (isset($_POST['submitNewPassword']) && $this->app->session->isUserAuthenticated) {
+            $oldPassword = $_POST['oldPassword'];
+            $newPassword = $_POST['newPassword'];
+            $newPasswordRepeat = $_POST['newPasswordRepeat'];
+
+            if ($newPassword == $newPasswordRepeat) {
+                $query = new Query($this->app->db);
+                $query
+                    ->select()
+                    ->from('authentic')
+                    ->where(['and', ['=', 'id', $this->app->session->authenticatedUserId], ['=', 'password', $oldPassword]]);
+                $isPasswordOk = $query->getRow();
+
+                if (isset($isPasswordOk)) {
+                    $authenticatedUserId = $this->app->session->authenticatedUserId;
+                    $this->app->session->isPasswordAuthenticated = true;
+                    $this->app->db->sendQuery("UPDATE authentic SET password = '$newPassword' WHERE id = '$authenticatedUserId'");
+
+                    $this->app->flashMessages->add('Пароль успешно изменён');
+
+                    header('Location: /');
+
+                    exit;
+                } else {
+                    if ($this->app->session->isUserAuthenticated) {
+                        unset($this->app->session->flashMessages);
+                        $this->app->flashMessages->add('Неверные данные');
+                    }
+                }
+            }
+            unset($this->app->session->flashMessages);
+            $this->app->flashMessages->add('Неверные данные');
+        } else if (!$this->app->session->isUserAuthenticated) {
+            $this->app->flashMessages->add("Вы не залогинены.");
+            }
+
+        $this->render('profile');
+    }
 }
