@@ -52,7 +52,7 @@ class AuthenticationController extends Controller
         header('Location: /');
     }
 
-    public function profileAction()
+    public function changePasswordAction()
     {
         if (isset($_POST['submitNewPassword']) && $this->app->session->isUserAuthenticated) {
             $oldPassword = $_POST['oldPassword'];
@@ -90,6 +90,6 @@ class AuthenticationController extends Controller
             $this->app->flashMessages->add("Вы не залогинены.");
             }
 
-        $this->render('profile');
+        $this->render('changePassword');
     }
 }
