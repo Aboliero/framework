@@ -9,26 +9,36 @@
 class Application
 {
     public $defaultControllerName = 'demo';
+    
     /**
      * @var Request
      */
     public $request;
+    
     /**
      * @var Autoloader
      */
     public $autoloader;
+    
     /**
      * @var Session
      */
     public $session;
+    
     /**
      * @var FlashMessage
      */
     public $flashMessages;
+    
     /**
      * @var Database
      */
     public $db;
+    
+    /**
+     * @var User
+     */
+    public $user;
 
     /**
      * @param null $controllerName

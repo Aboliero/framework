@@ -21,7 +21,7 @@ class AuthenticationController extends Controller
             $query
                 ->select('id')
                 ->from('authentic')
-                ->where(['and', ['=', 'username', $username], ['=', 'password', $password]]);
+                ->where(['and', ['=', 'username', $username], ['=', 'password', md5($password)]]);
             $authentic = $query->getRow();
 
             if (isset($authentic)) {
@@ -54,7 +54,14 @@ class AuthenticationController extends Controller
 
     public function changePasswordAction()
     {
-        if (isset($_POST['submitNewPassword']) && $this->app->session->isUserAuthenticated) {
+        if (!$this->app->session->isUserAuthenticated) {
+            $this->app->flashMessages->add('Вы не авторизованы.');
+            header('Location: /authentication/login');
+
+            exit;
+        }
+
+        if (isset($_POST['submitNewPassword'])) {
             $oldPassword = $_POST['oldPassword'];
             $newPassword = $_POST['newPassword'];
             $newPasswordRepeat = $_POST['newPasswordRepeat'];
@@ -64,13 +71,13 @@ class AuthenticationController extends Controller
                 $query
                     ->select()
                     ->from('authentic')
-                    ->where(['and', ['=', 'id', $this->app->session->authenticatedUserId], ['=', 'password', $oldPassword]]);
+                    ->where(['and', ['=', 'id', $this->app->session->authenticatedUserId], ['=', 'password', md5($oldPassword)]]);
                 $isPasswordOk = $query->getRow();
 
                 if (isset($isPasswordOk)) {
-                    $authenticatedUserId = $this->app->session->authenticatedUserId;
-                    $this->app->session->isPasswordAuthenticated = true;
-                    $this->app->db->sendQuery("UPDATE authentic SET password = '$newPassword' WHERE id = '$authenticatedUserId'");
+                    $authenticatedUserId = $this->app->db->connection->real_escape_string($this->app->session->authenticatedUserId);
+                    $newPasswordHash = $this->app->db->connection->real_escape_string(md5($newPassword));
+                    $this->app->db->sendQuery("UPDATE authentic SET password = '$newPasswordHash' WHERE id = '$authenticatedUserId'");
 
                     $this->app->flashMessages->add('Пароль успешно изменён');
 
@@ -78,17 +85,12 @@ class AuthenticationController extends Controller
 
                     exit;
                 } else {
-                    if ($this->app->session->isUserAuthenticated) {
-                        unset($this->app->session->flashMessages);
-                        $this->app->flashMessages->add('Неверные данные');
-                    }
+                    $this->app->flashMessages->add('Неверный старый пароль');
                 }
+            } else {
+                $this->app->flashMessages->add('Новые пароли не совпадают');
             }
-            unset($this->app->session->flashMessages);
-            $this->app->flashMessages->add('Неверные данные');
-        } else if (!$this->app->session->isUserAuthenticated) {
-            $this->app->flashMessages->add("Вы не залогинены.");
-            }
+        }
 
         $this->render('changePassword');
     }
