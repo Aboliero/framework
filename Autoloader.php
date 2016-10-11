@@ -10,6 +10,10 @@ class Autoloader
 {
     public function getFileName($className)
     {
+        if ($className == UserPanelWidget::class) {
+           return PROJECT_ROOT . '/widgets/UserPanel/' . $className . '.php';
+        }
+        
         return $className . '.php';
     }
 

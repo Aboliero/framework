@@ -11,6 +11,8 @@
 ini_set('display_errors', '1');
 header('Content-Type: text/html; charset=utf-8');
 
+define('PROJECT_ROOT', __DIR__);
+
 require_once 'Autoloader.php';
 $autoloader = new Autoloader();
 $autoloader->register();

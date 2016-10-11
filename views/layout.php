@@ -20,4 +20,5 @@
 <?= $content ?>
 
 <hr>
-<?= $this->simpleRender('userPanel') ?>
+<?php $widget = new UserPanelWidget($this->app); ?>
+<?= $widget->run() ?>

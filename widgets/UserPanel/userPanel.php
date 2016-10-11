@@ -1,7 +1,7 @@
 <?php
 /**
 * @var string $content
-* @var Controller $this
+* @var UserPanelWidget $this
 */
 ?>
 
