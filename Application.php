@@ -39,6 +39,20 @@ class Application
      * @var User
      */
     public $user;
+    
+    static private $instance;
+
+    /**
+     * @return static
+     */
+    public static function getInstance()
+    {
+        if (!static::$instance) {
+            static::$instance = new static;
+        }
+
+        return static::$instance;
+    }
 
     /**
      * @param null $controllerName
