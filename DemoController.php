@@ -40,4 +40,11 @@ class DemoController extends Controller
     {
         $this->render('hello');
     }
+
+    public function testAction()
+    {
+        $city1 = City::getById(1);
+        $city1->name = 'Moscow';
+        $city1->save();
+    }
 }

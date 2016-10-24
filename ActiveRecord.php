@@ -3,6 +3,10 @@
 
 abstract class ActiveRecord
 {
+    /**
+     * @var int
+     */
+    public $id;
 
     /**
      * @return string
@@ -38,5 +42,33 @@ abstract class ActiveRecord
         }
 
         return $activeRecords;
+    }
+
+    public static function getById($id)
+    {
+        $objects = static::getObjects(['=', 'id', $id], 1);
+        if ($objects) {
+            return array_shift($objects);
+        }
+        
+        return null;
+    }
+
+    public function save()
+    {
+        $database = Application::getInstance()->db;
+        $fields = (array)$this;
+        $keys = array_keys($fields);
+        $values = array_values($fields);
+        $params = join(', ', array_map(function($key, $value) use ($database) {
+            return $database->escapeName($key)
+                . ' = '
+                . "'" . $database->connection->real_escape_string($value) . "'";
+        }, $keys, $values));
+
+        $id = $database->connection->real_escape_string($this->id);
+        $tableName = $database->escapeName($this->getTableName());
+        $query = 'UPDATE ' . $tableName . ' SET ' . $params . ' WHERE id = ' . $id;
+        $database->sendQuery($query);
     }
 }
