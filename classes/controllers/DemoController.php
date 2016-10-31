@@ -1,11 +1,9 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 17.03.2016
- * Time: 0:49
- */
+namespace controllers;
+
+use City;
+use Controller;
 
 class DemoController extends Controller
 {

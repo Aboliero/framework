@@ -1,11 +1,11 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 27.07.2016
- * Time: 22:58
- */
+namespace controllers;
+use Controller;
+use DatabaseFieldExpression;
+use Exception;
+use Query;
+
 class CityController extends Controller
 {
     public $defaultActionName = 'list';

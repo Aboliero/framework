@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 27.03.2016
- * Time: 22:11
- */
 abstract class Controller // запрещает создание экземпляра этого класса
 {
 
@@ -28,7 +22,8 @@ abstract class Controller // запрещает создание экземпл�
 
     public function getName()
     {
-        $className = get_class($this);
+        $parts = explode('\\', get_class($this));
+        $className = array_pop($parts); // конец ебучего квеста по наводу порядка в этой системе. Ебать, запомнить надо.
         $controllerName = substr($className, 0, strrpos($className, 'Controller'));
 
         return $controllerName;

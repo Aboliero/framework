@@ -1,5 +1,7 @@
 <?php
 
+namespace components;
+
 class FlashMessage
 {
     /**

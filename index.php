@@ -1,19 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 16.03.2016
- * Time: 20:29
- * точка входа
- */
+
 //include - для активных
 //require_once -  для объявлений
+use components\Autoloader;
+use components\Database;
+use components\FlashMessage;
+use components\Request;
+use components\Session;
+use components\UrlManager;
+use components\User;
+
 ini_set('display_errors', '1');
 header('Content-Type: text/html; charset=utf-8');
 
 define('PROJECT_ROOT', __DIR__);
 
-require_once 'Autoloader.php';
+require_once 'classes/components/Autoloader.php';
 $autoloader = new Autoloader();
 $autoloader->register();
 $database = new Database();

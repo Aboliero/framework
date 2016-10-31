@@ -1,11 +1,6 @@
 <?php
+use components\Database;
 
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 04.05.2016
- * Time: 21:59
- */
 class Query
 {
 

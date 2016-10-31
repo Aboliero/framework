@@ -1,11 +1,13 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 17.03.2016
- * Time: 1:33
- */
+
+use components\Autoloader;
+use components\Database;
+use components\FlashMessage;
+use components\Request;
+use components\Session;
+use components\User;
+
 class Application
 {
     public $defaultControllerName = 'demo';
@@ -64,7 +66,7 @@ class Application
         if (is_null($controllerName)) {
             $controllerName = $this->defaultControllerName;
         }
-        $className = ucfirst($controllerName) . 'Controller';
+        $className = 'controllers\\' . ucfirst($controllerName) . 'Controller';
         if (!$this->autoloader->doesExist($className)) {
             throw new Exception('Нет такого контроллера');
         }

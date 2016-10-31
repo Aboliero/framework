@@ -1,12 +1,11 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 14.09.2016
- * Time: 13:27
- */
-class CountryController extends Controller
+namespace controllers;
+use DatabaseFieldExpression;
+use Exception;
+use Query;
+
+class CountryController extends \Controller
 {
     public $defaultActionName = 'list';
     public function listAction()

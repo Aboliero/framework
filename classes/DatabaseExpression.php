@@ -1,11 +1,5 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 18.05.2016
- * Time: 22:55
- */
 class DatabaseExpression
 {
     /**

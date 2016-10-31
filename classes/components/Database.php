@@ -1,11 +1,11 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 27.04.2016
- * Time: 22:13
- */
+namespace components;
+
+use DatabaseExpression;
+use Exception;
+use mysqli;
+
 class Database
 {
     /**

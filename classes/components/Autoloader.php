@@ -1,11 +1,9 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 30.03.2016
- * Time: 0:30
- */
+namespace components;
+
+use UserPanelWidget;
+
 class Autoloader
 {
     public function getFileName($className)
@@ -13,8 +11,8 @@ class Autoloader
         if ($className == UserPanelWidget::class) {
            return PROJECT_ROOT . '/widgets/UserPanel/' . $className . '.php';
         }
-        
-        return $className . '.php';
+
+        return PROJECT_ROOT . '/classes/' . join('/', explode('\\', $className)) . '.php'; //- смена пути на правильный
     }
 
     public function load($className)

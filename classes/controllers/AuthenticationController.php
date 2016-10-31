@@ -1,11 +1,9 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 29.09.2016
- * Time: 22:12
- */
+namespace controllers;
+
+use Controller;
+
 class AuthenticationController extends Controller
 {
     public $defaultActionName = 'login';
@@ -17,7 +15,7 @@ class AuthenticationController extends Controller
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            $query = new Query($this->app->db);
+            $query = new \Query($this->app->db);
             $query
                 ->select('id')
                 ->from('authentic')
@@ -67,7 +65,7 @@ class AuthenticationController extends Controller
             $newPasswordRepeat = $_POST['newPasswordRepeat'];
 
             if ($newPassword == $newPasswordRepeat) {
-                $query = new Query($this->app->db);
+                $query = new \Query($this->app->db);
                 $query
                     ->select()
                     ->from('authentic')

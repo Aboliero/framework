@@ -1,11 +1,7 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 21.09.2016
- * Time: 23:51
- */
+namespace components;
+
 class Session
 {
     function __construct()

@@ -1,12 +1,9 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 16.03.2016
- * Time: 20:31
- */
+namespace components;
 
+use Exception;
+use Route;
 
 class UrlManager
 {
@@ -26,7 +23,7 @@ class UrlManager
         }
         $path = explode('/', $path);
         if (count($path) > 2) {
-            throw new exception('Слишком много элементов в пути');
+            throw new Exception('Слишком много элементов в пути');
         }
         $route = new Route();
         $route->hostName = $_SERVER['HTTP_HOST'];
