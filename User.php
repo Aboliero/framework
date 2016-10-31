@@ -39,4 +39,13 @@ class User
 
         return $this->userCache;
     }
+
+    public function login($username, $password)
+    {
+        $query = new Query($this->database);
+        $query
+            ->select('id')
+            ->from('authentic')
+            ->where(['and', ['=', 'username', $username], ['=', 'password', md5($password)]]);
+    }
 }

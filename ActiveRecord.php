@@ -71,4 +71,9 @@ abstract class ActiveRecord
         $query = 'UPDATE ' . $tableName . ' SET ' . $params . ' WHERE id = ' . $id;
         $database->sendQuery($query);
     }
+
+    public function add()
+    {
+        
+    }
 }
