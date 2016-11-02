@@ -19,7 +19,7 @@ require_once 'classes/components/Autoloader.php';
 $autoloader = new Autoloader();
 $autoloader->register();
 $database = new Database();
-$database->connect('buncha.ru', 'root', 'pi31415', 'Aboliero');
+$database->connect('188.73.181.180', 'root', 'pi31415', 'Aboliero');
 
 $session = new Session();
 $request = new Request();

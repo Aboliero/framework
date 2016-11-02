@@ -45,10 +45,36 @@ class User
 
     public function login($username, $password)
     {
-        $query = new Query($this->database);
+        $query = new Query($this->database );
         $query
             ->select('id')
             ->from('authentic')
             ->where(['and', ['=', 'username', $username], ['=', 'password', md5($password)]]);
+        $authentic = $query->getRow();
+        
+        if (isset($authentic)) {
+            $this->session->authenticatedUserId = $authentic['id'];
+            
+            return true;
+        }
+        
+        return false;
+    }
+
+    public function changePassword($oldPassword)
+    {
+        $query = new Query($this->database);
+        $query
+            ->select()
+            ->from('authentic')
+            ->where(['and', ['=', 'id', $this->session->authenticatedUserId], ['=', 'password', md5($oldPassword)]]);
+        $isPasswordOk = $query->getRow();
+        
+        if (isset($isPasswordOk)) {
+            
+            return true;
+        }
+        
+        return false;
     }
 }

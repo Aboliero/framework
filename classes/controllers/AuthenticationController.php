@@ -15,17 +15,18 @@ class AuthenticationController extends Controller
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            $query = new \Query($this->app->db);
-            $query
-                ->select('id')
-                ->from('authentic')
-                ->where(['and', ['=', 'username', $username], ['=', 'password', md5($password)]]);
-            $authentic = $query->getRow();
 
-            if (isset($authentic)) {
+            //$query = new Query($this->app->db);
+            //$query
+            //    ->select('id')
+            //    ->from('authentic')
+            //    ->where(['and', ['=', 'username', $username], ['=', 'password', md5($password)]]);
+            //$authentic = $query->getRow();
+
+            if ($this->app->user->login($username, $password)) { //- тут был isset ($authentic)
                 $this->app->session->isUserAuthenticated = true;
                 $this->app->flashMessages->add('Вы зашли под логином ' . $username);
-                $this->app->session->authenticatedUserId = $authentic['id'];
+                //$this->app->session->authenticatedUserId = $authentic['id'];
 
 
                 header('Location: /');
@@ -65,14 +66,14 @@ class AuthenticationController extends Controller
             $newPasswordRepeat = $_POST['newPasswordRepeat'];
 
             if ($newPassword == $newPasswordRepeat) {
-                $query = new \Query($this->app->db);
-                $query
-                    ->select()
-                    ->from('authentic')
-                    ->where(['and', ['=', 'id', $this->app->session->authenticatedUserId], ['=', 'password', md5($oldPassword)]]);
-                $isPasswordOk = $query->getRow();
+                //$query = new Query($this->app->db);
+                //$query
+                //    ->select()
+                //    ->from('authentic')
+                //    ->where(['and', ['=', 'id', $this->app->session->authenticatedUserId], ['=', 'password', md5($oldPassword)]]);
+                //$isPasswordOk = $query->getRow();
 
-                if (isset($isPasswordOk)) {
+                if ($this->app->user->changePassword($oldPassword)) { // isset $isPasswordOk
                     $authenticatedUserId = $this->app->db->connection->real_escape_string($this->app->session->authenticatedUserId);
                     $newPasswordHash = $this->app->db->connection->real_escape_string(md5($newPassword));
                     $this->app->db->sendQuery("UPDATE authentic SET password = '$newPasswordHash' WHERE id = '$authenticatedUserId'");
