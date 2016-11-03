@@ -54,14 +54,14 @@ class User
         
         if (isset($authentic)) {
             $this->session->authenticatedUserId = $authentic['id'];
-            
+            $this->session->isUserAuthenticated = true;
             return true;
         }
         
         return false;
     }
 
-    public function changePassword($oldPassword)
+    public function checkPassword($oldPassword)
     {
         $query = new Query($this->database);
         $query

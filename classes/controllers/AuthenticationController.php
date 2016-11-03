@@ -24,7 +24,7 @@ class AuthenticationController extends Controller
             //$authentic = $query->getRow();
 
             if ($this->app->user->login($username, $password)) { //- тут был isset ($authentic)
-                $this->app->session->isUserAuthenticated = true;
+                
                 $this->app->flashMessages->add('Вы зашли под логином ' . $username);
                 //$this->app->session->authenticatedUserId = $authentic['id'];
 
@@ -73,7 +73,7 @@ class AuthenticationController extends Controller
                 //    ->where(['and', ['=', 'id', $this->app->session->authenticatedUserId], ['=', 'password', md5($oldPassword)]]);
                 //$isPasswordOk = $query->getRow();
 
-                if ($this->app->user->changePassword($oldPassword)) { // isset $isPasswordOk
+                if ($this->app->user->checkPassword($oldPassword)) { // isset $isPasswordOk
                     $authenticatedUserId = $this->app->db->connection->real_escape_string($this->app->session->authenticatedUserId);
                     $newPasswordHash = $this->app->db->connection->real_escape_string(md5($newPassword));
                     $this->app->db->sendQuery("UPDATE authentic SET password = '$newPasswordHash' WHERE id = '$authenticatedUserId'");
