@@ -36,7 +36,7 @@ class User
     {
         if (!$this->userCache) {
             $query = new Query($this->database);
-            $query->select('username')->from('authentic')->where(['=', 'id', $this->session->authenticatedUserId]);
+            $query->select()->from('authentic')->where(['=', 'id', $this->session->authenticatedUserId]);
             $this->userCache = $query->getRow();
         }
 
@@ -45,16 +45,18 @@ class User
 
     public function login($username, $password)
     {
-        $query = new Query($this->database );
+        $query = new Query($this->database);
         $query
-            ->select('id')
+            ->select()
             ->from('authentic')
             ->where(['and', ['=', 'username', $username], ['=', 'password', md5($password)]]);
-        $authentic = $query->getRow();
+        $user = $query->getRow();
         
-        if (isset($authentic)) {
-            $this->session->authenticatedUserId = $authentic['id'];
+        if (isset($user)) {
+            $this->session->authenticatedUserId = $user['id'];
             $this->session->isUserAuthenticated = true;
+            $this->userCache = $user;
+            
             return true;
         }
         
@@ -63,18 +65,27 @@ class User
 
     public function checkPassword($oldPassword)
     {
-        $query = new Query($this->database);
-        $query
-            ->select()
-            ->from('authentic')
-            ->where(['and', ['=', 'id', $this->session->authenticatedUserId], ['=', 'password', md5($oldPassword)]]);
-        $isPasswordOk = $query->getRow();
-        
-        if (isset($isPasswordOk)) {
-            
-            return true;
-        }
-        
-        return false;
+        $user = $this->getUser();
+
+        return $user['password'] == md5($oldPassword);
+    }
+
+    public function setPassword($newPassword)
+    {
+        $authenticatedUserId = $this->database->connection->real_escape_string($this->session->authenticatedUserId);
+        $newPasswordHash = $this->database->connection->real_escape_string(md5($newPassword));
+        $this->database->sendQuery("UPDATE authentic SET password = '$newPasswordHash' WHERE id = '$authenticatedUserId'");
+    }
+
+    public function isAuthenticated()
+    {
+        return $this->session->isUserAuthenticated ?: false;
+    }
+
+    public function logout()
+    {
+        unset($this->session->isUserAuthenticated);
+        unset($this->session->authenticatedUserId);
+        $this->userCache = null;
     }
 }
