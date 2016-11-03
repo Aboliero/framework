@@ -2,6 +2,7 @@
 
 namespace components;
 use Query;
+use User as Model;
 
 /**
  * Class User
@@ -30,14 +31,12 @@ class User
     }
 
     /**
-     * @return array|null
+     * @return Model|null
      */
-    public function getUser()
+    public function getModel()
     {
         if (!$this->userCache) {
-            $query = new Query($this->database);
-            $query->select()->from('authentic')->where(['=', 'id', $this->session->authenticatedUserId]);
-            $this->userCache = $query->getRow();
+            $this->userCache = Model::getById($this->session->authenticatedUserId);
         }
 
         return $this->userCache;
@@ -65,16 +64,16 @@ class User
 
     public function checkPassword($oldPassword)
     {
-        $user = $this->getUser();
+        $model = $this->getModel();
 
-        return $user['password'] == md5($oldPassword);
+        return $model->password == md5($oldPassword);
     }
 
     public function setPassword($newPassword)
     {
-        $authenticatedUserId = $this->database->connection->real_escape_string($this->session->authenticatedUserId);
-        $newPasswordHash = $this->database->connection->real_escape_string(md5($newPassword));
-        $this->database->sendQuery("UPDATE authentic SET password = '$newPasswordHash' WHERE id = '$authenticatedUserId'");
+        $model = $this->getModel();
+        $model->password = md5($newPassword);
+        $model->save();
     }
 
     public function isAuthenticated()
