@@ -3,7 +3,7 @@
 class UserPanelWidget
 {
     /**
-     * @var Application $app
+     * @var Application
      */
     public $app;
 
