@@ -15,20 +15,23 @@ header('Content-Type: text/html; charset=utf-8');
 
 define('PROJECT_ROOT', __DIR__);
 
-require_once 'classes/components/Autoloader.php';
-$autoloader = new Autoloader();
+require_once 'classes/Component.php'; // запросить_однажды 'классы/Компонента.пхп' 
+
+require_once 'classes/components/Autoloader.php'; // запросить_однажды 'классы/компоненты/Автозагрузчик.пхп' 
+
+$autoloader = new Autoloader(); // $автозагрузчик = новый Автозагрузчик
 $autoloader->register();
 $database = new Database();
 $database->connect('188.73.181.180', 'root', 'pi31415', 'Aboliero');
 
 $session = new Session();
 $request = new Request();
-$flashMessages = new FlashMessage($session);
+$flashMessages = new FlashMessage();
 
 $urlManager = new UrlManager();
-$route = $urlManager->getCurrentRout();
+$route = $urlManager->getCurrentRoute();
 
-$user = new User($session, $database);
+$user = new User();
 
 $application = Application::getInstance();
 $application->session = $session;

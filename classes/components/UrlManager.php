@@ -5,13 +5,13 @@ namespace components;
 use Exception;
 use Route;
 
-class UrlManager
+class UrlManager extends \Component
 {
     /**
      * @return Route
      * @throws exception
      */
-    public function getCurrentRout()
+    public function getCurrentRoute()
     {
         $path = $_SERVER['REQUEST_URI'];
         if (substr($path, 0, 1) == '/') {

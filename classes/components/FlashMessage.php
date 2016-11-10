@@ -2,22 +2,12 @@
 
 namespace components;
 
-class FlashMessage
+class FlashMessage extends \Component
 {
-    /**
-     * @var Session
-     */
-    public $session;
-
-    public function __construct($session)
-    {
-        $this->session = $session;
-    }
-
     protected function checkProperty()
     {
-        if (!isset($this->session->flashMessages) || !is_array($this->session->flashMessages)) {
-            $this->session->flashMessages = [];
+        if (!isset($this->app->session->flashMessages) || !is_array($this->app->session->flashMessages)) {
+            $this->app->session->flashMessages = [];
         }
     }
 
@@ -25,15 +15,15 @@ class FlashMessage
     {
         $this->checkProperty();
 
-        $this->session->flashMessages = array_merge($this->session->flashMessages, [$message]);
+        $this->app->session->flashMessages = array_merge($this->app->session->flashMessages, [$message]);
     }
 
     public function getAll()
     {
         $this->checkProperty();
 
-        $messages = $this->session->flashMessages;
-        $this->session->flashMessages = [];
+        $messages = $this->app->session->flashMessages;
+        $this->app->session->flashMessages = [];
 
         return $messages;
     }

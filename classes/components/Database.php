@@ -6,7 +6,7 @@ use DatabaseExpression;
 use Exception;
 use mysqli;
 
-class Database
+class Database extends \Component
 {
     /**
      * @var mysqli

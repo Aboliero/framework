@@ -7,28 +7,12 @@ use User as Model;
 /**
  * Class User
  */
-class User
+class User extends \Component
 {
     /**
-     * @var Session
-     */
-    protected $session;
-
-    /**
-     * @var Database
-     */
-    protected $database;
-
-    /**
-     * @var array
+     * @var Model
      */
     protected $userCache;
-
-    public function __construct(Session $session, Database $database)
-    {
-        $this->session = $session;
-        $this->database = $database;
-    }
 
     /**
      * @return Model|null
@@ -36,7 +20,7 @@ class User
     public function getModel()
     {
         if (!$this->userCache) {
-            $this->userCache = Model::getById($this->session->authenticatedUserId);
+            $this->userCache = Model::getById($this->app->session->authenticatedUserId);
         }
 
         return $this->userCache;
@@ -44,16 +28,20 @@ class User
 
     public function login($username, $password)
     {
-        $query = new Query($this->database);
+        $query = new Query($this->app->db);
         $query
             ->select()
             ->from('authentic')
             ->where(['and', ['=', 'username', $username], ['=', 'password', md5($password)]]);
         $user = $query->getRow();
-        
+
+
+        //Model::getObjects(['and', ['=', 'username', $username], ['=', 'password', md5($password)]]);
+
+
         if (isset($user)) {
-            $this->session->authenticatedUserId = $user['id'];
-            $this->session->isUserAuthenticated = true;
+            $this->app->session->authenticatedUserId = $user['id'];
+            $this->app->session->isUserAuthenticated = true;
             $this->userCache = $user;
             
             return true;
@@ -78,13 +66,13 @@ class User
 
     public function isAuthenticated()
     {
-        return $this->session->isUserAuthenticated ?: false;
+        return $this->app->session->isUserAuthenticated ?: false;
     }
 
     public function logout()
     {
-        unset($this->session->isUserAuthenticated);
-        unset($this->session->authenticatedUserId);
+        unset($this->app->session->isUserAuthenticated);
+        unset($this->app->session->authenticatedUserId);
         $this->userCache = null;
     }
 }

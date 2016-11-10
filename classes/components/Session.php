@@ -2,7 +2,7 @@
 
 namespace components;
 
-class Session
+class Session extends \Component
 {
     function __construct()
     {

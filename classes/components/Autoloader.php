@@ -4,7 +4,7 @@ namespace components;
 
 use UserPanelWidget;
 
-class Autoloader
+class Autoloader extends \Component
 {
     public function getFileName($className)
     {

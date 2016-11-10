@@ -2,7 +2,7 @@
 
 namespace components;
 
-class Request
+class Request extends \Component
 {
     public function getParam($paramName)
     {
