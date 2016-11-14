@@ -4,6 +4,7 @@
  * Class User
  * @property $username string
  * @property $password string
+ * @property $id    string
  */
 class User extends ActiveRecord
 {

@@ -7,10 +7,16 @@ use components\FlashMessage;
 use components\Request;
 use components\Session;
 use components\User;
+use components\UrlManager;
 
 class Application
 {
     public $defaultControllerName = 'demo';
+
+    /**
+     * @var UrlManager
+     */
+    public $urlManager;
     
     /**
      * @var Request
@@ -74,5 +80,19 @@ class Application
         $controller = new $className();
         $controller->app = $this;
         return $controller;
+    }
+    
+    public function configure($config)
+    {
+        $this->createComponents($config['components']);
+    }
+
+    public function createComponents($list)
+    {
+        foreach ($list as $name => $config) {
+            $params = isset($config['params']) ? $config['params'] : [];
+            $component = new $config['className']($params);
+            $this->$name = $component;
+        }
     }
 }

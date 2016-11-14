@@ -13,6 +13,11 @@ class Database extends \Component
      */
     public $connection;
 
+    public function __construct($params)
+    {
+        $this->connect($params['hostname'], $params['username'], $params['password'], $params['dbName']);
+    }
+
     public function connect($serverName, $userName, $userPassword, $dbName)
     {
         $this->connection = new mysqli($serverName, $userName, $userPassword, $dbName);
