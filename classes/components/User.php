@@ -28,19 +28,10 @@ class User extends \Component
 
     public function login($username, $password)
     {
-        $query = new Query($this->app->db);
-        $query
-            ->select()
-            ->from('authentic')
-            ->where(['and', ['=', 'username', $username], ['=', 'password', md5($password)]]);
-        $user = $query->getRow();
-
-
-        //Model::getObjects(['and', ['=', 'username', $username], ['=', 'password', md5($password)]]);
-
+        $user = Model::getObject(['and', ['=', 'username', $username], ['=', 'password', md5($password)]]);
 
         if (isset($user)) {
-            $this->app->session->authenticatedUserId = $user['id'];
+            $this->app->session->authenticatedUserId = $user->id;
             $this->app->session->isUserAuthenticated = true;
             $this->userCache = $user;
             

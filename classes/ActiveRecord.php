@@ -46,11 +46,18 @@ abstract class ActiveRecord
 
     public static function getById($id)
     {
-        $objects = static::getObjects(['=', 'id', $id], 1);
+        $condition = ['=', 'id', $id];
+        
+        return static::getObject($condition);
+    }
+
+    public static function getObject($condition)
+    {
+        $objects = static::getObjects($condition, 1);
         if ($objects) {
             return array_shift($objects);
         }
-        
+
         return null;
     }
 
