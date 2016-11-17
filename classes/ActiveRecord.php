@@ -9,6 +9,11 @@ abstract class ActiveRecord
     public $id;
 
     /**
+     * @var int
+     */
+    protected $oldId;
+
+    /**
      * @return string
      */
     public static function getTableName()
@@ -35,6 +40,7 @@ abstract class ActiveRecord
         $rows = $query->getRows();
         foreach ($rows as $row) {
             $activeRecord = new static;
+            $activeRecord->oldId = $row['id'];
             foreach ($row as $name => $value) {
                 $activeRecord->$name = $value;
             }
@@ -65,22 +71,32 @@ abstract class ActiveRecord
     {
         $database = Application::getInstance()->db;
         $fields = (array)$this;
+        unset($fields[chr(0) . '*' . chr(0) . 'oldId']);
+        $tableName = $database->escapeName($this->getTableName());
         $keys = array_keys($fields);
         $values = array_values($fields);
         $params = join(', ', array_map(function($key, $value) use ($database) {
-            return $database->escapeName($key)
-                . ' = '
-                . "'" . $database->connection->real_escape_string($value) . "'";
+            if (is_null($value)) {
+                $sqlValue = 'NULL';
+            } else {
+                $sqlValue = "'" . $database->connection->real_escape_string($value) . "'";
+            }
+
+            return $database->escapeName($key) . ' = ' . $sqlValue;
         }, $keys, $values));
 
-        $id = $database->connection->real_escape_string($this->id);
-        $tableName = $database->escapeName($this->getTableName());
-        $query = 'UPDATE ' . $tableName . ' SET ' . $params . ' WHERE id = ' . $id;
-        $database->sendQuery($query);
-    }
+        if (isset($this->oldId)) {
+            $oldId = $database->connection->real_escape_string($this->oldId);
+            $query = 'UPDATE ' . $tableName . ' SET ' . $params . ' WHERE id = ' . $oldId;
+        } else {
+            $query = 'INSERT INTO ' . $tableName . ' SET ' . $params;
+        }
 
-    public function add()
-    {
+        $database->sendQuery($query);
+        if (!isset($this->oldId)) {
+            $this->id = $database->connection->insert_id;
+        }
         
+        $this->oldId = $this->id;
     }
 }
