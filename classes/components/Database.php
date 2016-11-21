@@ -89,4 +89,21 @@ class Database extends \Component
             ? $name->getEscapedValue()
             : static::escapeName($name);                
     }
+
+    public function formatSetQueryPart($fields)
+    {
+        $keys = array_keys($fields);
+        $values = array_values($fields);
+        $params = join(', ', array_map(function($key, $value) {
+            if (is_null($value)) {
+                $sqlValue = 'NULL';
+            } else {
+                $sqlValue = "'" . $this->connection->real_escape_string($value) . "'";
+            }
+
+            return $this->escapeName($key) . ' = ' . $sqlValue;
+        }, $keys, $values));
+        
+        return $params;
+    }
 }

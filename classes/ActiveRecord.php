@@ -70,20 +70,9 @@ abstract class ActiveRecord
     public function save()
     {
         $database = Application::getInstance()->db;
-        $fields = (array)$this;
-        unset($fields[chr(0) . '*' . chr(0) . 'oldId']);
+        $fields = $this->getFields();
         $tableName = $database->escapeName($this->getTableName());
-        $keys = array_keys($fields);
-        $values = array_values($fields);
-        $params = join(', ', array_map(function($key, $value) use ($database) {
-            if (is_null($value)) {
-                $sqlValue = 'NULL';
-            } else {
-                $sqlValue = "'" . $database->connection->real_escape_string($value) . "'";
-            }
-
-            return $database->escapeName($key) . ' = ' . $sqlValue;
-        }, $keys, $values));
+        $params = $database->formatSetQueryPart($fields);
 
         if (isset($this->oldId)) {
             $oldId = $database->connection->real_escape_string($this->oldId);
@@ -98,5 +87,28 @@ abstract class ActiveRecord
         }
         
         $this->oldId = $this->id;
+    }
+
+    public static function getColumnNames()
+    {
+        return array_column(static::getColumns(), 'Field');
+    }
+
+    public static function getColumns()
+    {
+        $tableName = static::getTableName();
+        $database = Application::getInstance()->db;
+
+        return $database->sendQuery('SHOW COLUMNS FROM ' . $database->escapeName($tableName));
+    }
+
+    /**
+     * @return array ассоциативный массив, где ключи имена столбцов, а значения - значения одноименных св-в модели.
+     */
+    public function getFields()
+    {
+        $columnNames = static::getColumnNames();
+        $flippedColumns = array_flip($columnNames);
+        return array_intersect_key((array)$this, $flippedColumns);
     }
 }
