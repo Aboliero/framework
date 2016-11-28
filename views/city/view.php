@@ -2,11 +2,11 @@
 /**
  * @var array[] $city
  */
-
+$creationDate = is_null($city['creationDate']) ? null : DateTime::createFromFormat('Y-m-d', $city['creationDate']);
 ?>
 Город: "<?= htmlspecialchars($city['name']) ?>"<br>
 Население: <?= htmlspecialchars($city['population']) ?> чел.<br>
-Дата создания: <?= !htmlspecialchars($city['creationDate']) ? 'неизвестна' : htmlspecialchars($city['creationDate']) ?><br>
+Дата создания: <?= is_null($creationDate) ? 'неизвестна' : htmlspecialchars($creationDate->format('d.m.Y')) ?><br>
 Уровень безработицы: <?= $city['unemploymentRate'] * 100 ?>%<br>
 Страна: "<?= htmlspecialchars($city['countryName']) ?>"<br>
 <br>

@@ -44,7 +44,8 @@ class CityController extends Controller
             $population = $this->app->db->connection->real_escape_string($_POST['population']);
             $id = $this->app->db->connection->real_escape_string($_GET['id']);
             $countryId = $this->app->db->connection->real_escape_string($_POST['countryId']);
-            $this->app->db->sendQuery("UPDATE cities SET name = '$name', population = '$population', countryId = '$countryId' WHERE id = '$id'");
+            $unemploymentRate = $this->app->db->connection->real_escape_string($_POST['unemploymentRate'] / 100);
+            $this->app->db->sendQuery("UPDATE cities SET name = '$name', population = '$population', countryId = '$countryId', unemploymentRate = '$unemploymentRate' WHERE id = '$id'");
 
             $isSaved = true;
         }
