@@ -50,6 +50,10 @@ abstract class ActiveRecord
         return $activeRecords;
     }
 
+    /**
+     * @param $id
+     * @return static
+     */
     public static function getById($id)
     {
         $condition = ['=', 'id', $id];
@@ -110,5 +114,18 @@ abstract class ActiveRecord
         $columnNames = static::getColumnNames();
         $flippedColumns = array_flip($columnNames);
         return array_intersect_key((array)$this, $flippedColumns);
+    }
+
+    public function delete()
+    {
+        if (is_null($this->oldId)) {
+            throw new Exception('не существует существует объекта в базе');
+        }
+        
+        $database = Application::getInstance()->db;
+        $tableName = static::getTableName();
+        $oldId = $database->connection->real_escape_string($this->oldId);
+        $database->sendQuery('DELETE FROM ' . $database->escapeName($tableName) . ' WHERE id = ' . $oldId);
+        $this->oldId = null;
     }
 }
