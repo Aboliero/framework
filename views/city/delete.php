@@ -1,7 +1,7 @@
 <?php
-/** @var array $city */
+/** @var City $city */
 ?>
-Вы действительно хотите удалить город <?= $city['name'] ?>? <br>
+Вы действительно хотите удалить город <?= $city->name ?>? <br>
 <br>
 
 <form method="post">

@@ -23,7 +23,7 @@ class CityController extends Controller
             throw new Exception('Не выбран город');
         }
         
-        $city = $this->getCity($_GET['id']);
+        $city = City::getById($_GET['id']);
         if (is_null($city)) {
             throw new Exception('Не существует такого id города');
         }
@@ -39,18 +39,20 @@ class CityController extends Controller
 
         $isSaved = false;
         if (isset($_POST['submit'])) {
-            $name = $this->app->db->connection->real_escape_string($_POST['name']);
-            $population = $this->app->db->connection->real_escape_string($_POST['population']);
-            $id = $this->app->db->connection->real_escape_string($_GET['id']);
-            $countryId = $this->app->db->connection->real_escape_string($_POST['countryId']);
-            $unemploymentRate = $this->app->db->connection->real_escape_string($_POST['unemploymentRate'] / 100);
-            $this->app->db->sendQuery("UPDATE cities SET name = '$name', population = '$population', countryId = '$countryId', unemploymentRate = '$unemploymentRate' WHERE id = '$id'");
+            $city = new City(false);
+            $city->name = $this->app->db->connection->real_escape_string($_POST['name']);
+            $city->population = $this->app->db->connection->real_escape_string($_POST['population']);
+            $city->id = $this->app->db->connection->real_escape_string($_GET['id']);
+            $city->countryId = $this->app->db->connection->real_escape_string($_POST['countryId']);
+            $city->unemploymentRate = $this->app->db->connection->real_escape_string($_POST['unemploymentRate'] / 100);
+            //$this->app->db->sendQuery("UPDATE cities SET name = '$name', population = '$population', countryId = '$countryId', unemploymentRate = '$unemploymentRate' WHERE id = '$id'");
+            $city->save();
 
             $isSaved = true;
         }
 
 
-        $city = $this->getCity($_GET['id']);
+        $city = City::getById($_GET['id']);
         if (is_null($city)) {
             throw new Exception('Не существует такого id города');
         }
@@ -81,12 +83,15 @@ class CityController extends Controller
 
     public function addAction()
     {
+        $city = new City();
 
         if (isset($_POST['submit'])) {
-            $name = $this->app->db->connection->real_escape_string($_POST['name']);
-            $population = $this->app->db->connection->real_escape_string($_POST['population']);
-            $countryId = $this->app->db->connection->real_escape_string($_POST['countryId']);
-            $this->app->db->sendQuery("INSERT INTO `cities` SET name = '$name', population = '$population', countryId = '$countryId'");
+
+            $city->name = $this->app->db->connection->real_escape_string($_POST['name']);
+            $city->population = $this->app->db->connection->real_escape_string($_POST['population']);
+            $city->countryId = $this->app->db->connection->real_escape_string($_POST['countryId']);
+            //$this->app->db->sendQuery("INSERT INTO `cities` SET name = '$name', population = '$population', countryId = '$countryId'");
+            $city->save();
 
             $newId = $this->app->db->connection->insert_id;
 
@@ -100,16 +105,6 @@ class CityController extends Controller
             exit;
         }
 
-        $city = [
-            'id' => null,
-            'name' => '',
-            'population' => null,
-            'isCapital' => null,
-            'creationDate' => null,
-            'unemploymentRate' => null,
-            'countryId' => '',
-        ];
-
         $query = new Query($this->app->db);
         $query->select(['name', 'id'])->from('countries');
         $countries = $query->getRows();
@@ -121,16 +116,14 @@ class CityController extends Controller
     public function deleteAction()
     {
         $id = $_GET['id'];
-        $city = $this->getCity($id);
+        $city = City::getById($id);
         if (!$city) {
             throw new Exception('ААА!!! ЖОСТЬ! ГОРАДА НЕТ!! ПИЗДА!');
         }
 
         if (isset($_POST['confirm'])) {
-            $delId = $this->app->db->connection->real_escape_string($id);
-            $this->app->db->sendQuery("DELETE FROM `cities` WHERE `id` = '$delId' ");
-
-            $this->app->flashMessages->add('ВНЕМАНИЕ!!! ГОРАД ' . $city['name'] . ' УДАЛЁН!!!</strong>');
+            $city->delete();
+            $this->app->flashMessages->add('ВНЕМАНИЕ!!! ГОРАД ' . $city->name . ' УДАЛЁН!!!</strong>');
             
             header('Location: /city/list');
 
