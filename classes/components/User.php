@@ -1,7 +1,6 @@
 <?php
 
 namespace components;
-use Query;
 use User as Model;
 
 /**

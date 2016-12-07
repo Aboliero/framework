@@ -7,7 +7,7 @@
 ?>
 <form method="post">
     <label for="name">Название</label><br>
-    <input name="name" id="name" value="<?= htmlspecialchars($city['name']) ?>"><br>
+    <input name="name" id="name" value="<?= htmlspecialchars($city['name']) ?>"><br> <!--$city['name'] -->
     <label for="population">Население</label><br>
     <input name="population" id="population" value="<?= htmlspecialchars($city['population']) ?>"><br>
     <!-- <label for="creationDate">Дата создания</label><br>

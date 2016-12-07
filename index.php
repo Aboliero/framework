@@ -24,7 +24,6 @@ $application->autoloader = $autoloader;
 $application->configure($config);
 
 
-
 $route = $application->urlManager->getCurrentRoute();
 
 $controller = $application->getController($route->controllerName);

@@ -5,16 +5,15 @@ use Controller;
 use DatabaseFieldExpression;
 use Exception;
 use Query;
+use City;
 
 class CityController extends Controller
 {
     public $defaultActionName = 'list';
+
     public function listAction()
     {
-        $query = new Query($this->app->db);
-        $query->select()->from('cities');
-        $cities = $query->getRows();
-
+        $cities = City::getObjects();
         $this->render('list', ['cities' => $cities]);
     }
 
@@ -76,7 +75,7 @@ class CityController extends Controller
             ->leftJoin('countries', ['=', 'cities.countryId', new DatabaseFieldExpression('countries.id')])
             ->where(['=', 'cities.id', $id]);
         $city = $query->getRow();
-        
+
         return $city;
     }
 
