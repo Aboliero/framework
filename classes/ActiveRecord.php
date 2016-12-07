@@ -21,6 +21,13 @@ abstract class ActiveRecord
         return '';
     }
 
+    public function __construct($isNew = true)
+    {
+        if ($isNew) {
+            $this->init();
+        }
+    }
+
     /**
      * @param $condition
      * @param $limit
@@ -39,7 +46,7 @@ abstract class ActiveRecord
         }
         $rows = $query->getRows();
         foreach ($rows as $row) {
-            $activeRecord = new static;
+            $activeRecord = new static(false);
             $activeRecord->oldId = $row['id'];
             foreach ($row as $name => $value) {
                 $activeRecord->$name = $value;
@@ -49,6 +56,15 @@ abstract class ActiveRecord
 
         return $activeRecords;
     }
+
+    protected function init()
+    {
+        $columnNames = static::getColumnNames();
+        foreach ($columnNames as $name) {
+            $this->$name = null;
+        }
+    }
+
 
     /**
      * @param $id
@@ -93,6 +109,9 @@ abstract class ActiveRecord
         $this->oldId = $this->id;
     }
 
+    /**
+     * @return string[]
+     */
     public static function getColumnNames()
     {
         return array_column(static::getColumns(), 'Field');
