@@ -98,7 +98,7 @@ abstract class ActiveRecord
             $oldId = $database->connection->real_escape_string($this->oldId);
             $query = 'UPDATE ' . $tableName . ' SET ' . $params . ' WHERE id = ' . $oldId;
         } else {
-            $query = 'REPLACE INTO ' . $tableName . ' SET ' . $params;
+            $query = 'INSERT INTO ' . $tableName . ' SET ' . $params;
         }
 
         $database->sendQuery($query);

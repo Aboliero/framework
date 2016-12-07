@@ -38,21 +38,20 @@ class CityController extends Controller
         }
 
         $isSaved = false;
+
+        $city = City::getById($_GET['id']);
+
         if (isset($_POST['submit'])) {
-            $city = new City(false);
-            $city->name = $this->app->db->connection->real_escape_string($_POST['name']);
-            $city->population = $this->app->db->connection->real_escape_string($_POST['population']);
-            $city->id = $this->app->db->connection->real_escape_string($_GET['id']);
-            $city->countryId = $this->app->db->connection->real_escape_string($_POST['countryId']);
-            $city->unemploymentRate = $this->app->db->connection->real_escape_string($_POST['unemploymentRate'] / 100);
+            $city->name = $_POST['name'];
+            $city->population = $_POST['population'];
+            $city->countryId = $_POST['countryId'];
+            $city->unemploymentRate = $_POST['unemploymentRate'] / 100;
             //$this->app->db->sendQuery("UPDATE cities SET name = '$name', population = '$population', countryId = '$countryId', unemploymentRate = '$unemploymentRate' WHERE id = '$id'");
             $city->save();
 
             $isSaved = true;
         }
 
-
-        $city = City::getById($_GET['id']);
         if (is_null($city)) {
             throw new Exception('Не существует такого id города');
         }
