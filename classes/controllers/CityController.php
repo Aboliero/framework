@@ -2,10 +2,10 @@
 
 namespace controllers;
 use Controller;
-use DatabaseFieldExpression;
 use Exception;
-use Query;
 use City;
+use Country;
+use DateTime;
 
 class CityController extends Controller
 {
@@ -42,11 +42,12 @@ class CityController extends Controller
         $city = City::getById($_GET['id']);
 
         if (isset($_POST['submit'])) {
+            $creationDate = DateTime::createFromFormat('d.m.Y', $_POST['creationDate']);
             $city->name = $_POST['name'];
             $city->population = $_POST['population'];
             $city->countryId = $_POST['countryId'];
             $city->unemploymentRate = $_POST['unemploymentRate'] / 100;
-            //$this->app->db->sendQuery("UPDATE cities SET name = '$name', population = '$population', countryId = '$countryId', unemploymentRate = '$unemploymentRate' WHERE id = '$id'");
+            $city->creationDate = $creationDate->format('Y-m-d');
             $city->save();
 
             $isSaved = true;
@@ -56,40 +57,24 @@ class CityController extends Controller
             throw new Exception('Не существует такого id города');
         }
 
-        $query = new Query($this->app->db);
-        $query->select(['name', 'id'])->from('countries');
-        $countries = $query->getRows();
+        $countries = Country::getObjects();
 
         $this->render('edit', ['city' => $city, 'isSaved' => $isSaved, 'countries' => $countries]);
     }
 
-    /**
-     * @param $id int
-     * @return string[]
-     */
-    public function getCity($id)
-    {
-        $query = new Query($this->app->db);
-        $query
-            ->select(['cities.*', 'countries.name countryName'])
-            ->from('cities')
-            ->leftJoin('countries', ['=', 'cities.countryId', new DatabaseFieldExpression('countries.id')])
-            ->where(['=', 'cities.id', $id]);
-        $city = $query->getRow();
-
-        return $city;
-    }
-
+       
     public function addAction()
     {
         $city = new City();
 
         if (isset($_POST['submit'])) {
 
-            $city->name = $this->app->db->connection->real_escape_string($_POST['name']);
-            $city->population = $this->app->db->connection->real_escape_string($_POST['population']);
-            $city->countryId = $this->app->db->connection->real_escape_string($_POST['countryId']);
-            //$this->app->db->sendQuery("INSERT INTO `cities` SET name = '$name', population = '$population', countryId = '$countryId'");
+            $creationDate = DateTime::createFromFormat('d.m.Y', $_POST['creationDate']);
+            $city->name = $_POST['name'];
+            $city->population = $_POST['population'];
+            $city->countryId = $_POST['countryId'];
+            $city->creationDate = $creationDate;
+            $city->unemploymentRate = $_POST['unemploymentRate'] / 100;
             $city->save();
 
             $newId = $this->app->db->connection->insert_id;
@@ -104,10 +89,7 @@ class CityController extends Controller
             exit;
         }
 
-        $query = new Query($this->app->db);
-        $query->select(['name', 'id'])->from('countries');
-        $countries = $query->getRows();
-
+        $countries = Country::getObjects();
         $this->render('edit', ['city' => $city, 'isSaved' => false, 'countries' => $countries]);
     }
 

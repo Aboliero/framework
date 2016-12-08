@@ -2,12 +2,12 @@
 /**
  * Class City
  * @property $name string
- * @property $population string
- * @property $isCapital string
- * @property $id string
+ * @property $population int
+ * @property $isCapital int
+ * @property $id int
  * @property $creationDate string
- * @property $unemploymentRate string
- * @property $countryId string
+ * @property $unemploymentRate float
+ * @property $countryId int
  */
 class City extends ActiveRecord
 {
@@ -16,4 +16,11 @@ class City extends ActiveRecord
         return 'cities';
     }
 
+    /**
+     *  @return Country
+     */
+    public function getCountry()
+    {
+        return Country::getById($this->countryId);
+    }
 }

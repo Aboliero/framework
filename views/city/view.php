@@ -1,6 +1,7 @@
 <?php
 /**
  * @var City $city
+ * @var Country $country
  */
 $creationDate = is_null($city->creationDate) ? null : DateTime::createFromFormat('Y-m-d', $city->creationDate);
 ?>
@@ -8,7 +9,7 @@ $creationDate = is_null($city->creationDate) ? null : DateTime::createFromFormat
 Население: <?= htmlspecialchars($city->population) ?> чел.<br>
 Дата создания: <?= is_null($creationDate) ? 'неизвестна' : htmlspecialchars($creationDate->format('d.m.Y')) ?><br>
 Уровень безработицы: <?= $city->unemploymentRate * 100 ?>%<br>
-<!--Страна: "<?= htmlspecialchars($city->countryName) ?>"<br> -->
+Страна: "<?= htmlspecialchars($city->getCountry()->name) ?>"<br>
 <br>
 <br>
     <a href="/city/edit?id=<?= urlencode($city->id) ?>"><small>Редактировать</small></a> <br>
