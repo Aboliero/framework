@@ -12,7 +12,7 @@ $creationDate = is_null($city->creationDate) ? null : DateTime::createFromFormat
     <label for="population">Население</label><br>
     <input name="population" id="population" value="<?= htmlspecialchars($city->population) ?>"><br>
     <label for="creationDate">Дата создания</label><br>
-    <input name="creationDate" id="creationDate" value="<?= is_null($creationDate) ? 'неизвестна' : htmlspecialchars($creationDate->format('d.m.Y')) ?>"> Укажите в формате дд.мм.гггг<br>
+    <input name="creationDate" id="creationDate" value="<?= is_null($creationDate) ? '' : htmlspecialchars($creationDate->format('d.m.Y')) ?>"> Укажите в формате дд.мм.гггг<br>
     <label for="unemploymentRate">Уровень безработицы</label><br>
     <input name="unemploymentRate" id="unemploymentRate" value="<?= $city->unemploymentRate * 100 ?>"><br>
     <label for="countryId">Страна</label><br>

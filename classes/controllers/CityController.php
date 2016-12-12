@@ -42,12 +42,11 @@ class CityController extends Controller
         $city = City::getById($_GET['id']);
 
         if (isset($_POST['submit'])) {
-            $creationDate = DateTime::createFromFormat('d.m.Y', $_POST['creationDate']);
             $city->name = $_POST['name'];
             $city->population = $_POST['population'];
             $city->countryId = $_POST['countryId'];
             $city->unemploymentRate = $_POST['unemploymentRate'] / 100;
-            $city->creationDate = $creationDate->format('Y-m-d');
+            $city->creationDateObject = $_POST['creationDate'] == '' ? null : DateTime::createFromFormat('d.m.Y', $_POST['creationDate']);
             $city->save();
 
             $isSaved = true;
@@ -69,19 +68,17 @@ class CityController extends Controller
 
         if (isset($_POST['submit'])) {
 
-            $creationDate = DateTime::createFromFormat('d.m.Y', $_POST['creationDate']);
+
             $city->name = $_POST['name'];
             $city->population = $_POST['population'];
             $city->countryId = $_POST['countryId'];
-            $city->creationDate = $creationDate;
+            $city->creationDateObject = $_POST['creationDate'] == '' ? null : DateTime::createFromFormat('d.m.Y', $_POST['creationDate']);;
             $city->unemploymentRate = $_POST['unemploymentRate'] / 100;
             $city->save();
 
-            $newId = $this->app->db->connection->insert_id;
-
             $this->app->flashMessages->add('
                 <strong>ВНЕМАНИЕ!!! ГОРАД ДАБАВЛИН!!!</strong> <br>
-                <a href="/city/edit?id=' . $newId . '">Редактировать новый город</a>
+                <a href="/city/edit?id=' . $city->id . '">Редактировать новый город</a>
             ');
 
             header('Location: /city/list');

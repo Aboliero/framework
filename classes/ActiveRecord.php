@@ -147,4 +147,22 @@ abstract class ActiveRecord
         $database->sendQuery('DELETE FROM ' . $database->escapeName($tableName) . ' WHERE id = ' . $oldId);
         $this->oldId = null;
     }
+
+    public function __get($name)
+    {
+        if (in_array($name, static::getColumnNames())) {
+            return null;
+        }
+
+        throw new Exception('Не найдено свойство в объекте');
+    }
+
+    public function __set($name, $value)
+    {
+        if (in_array($name, static::getColumnNames())) {
+            $this->$name = $value;
+        } else {
+            throw new Exception('Не найдено свойство ' . $name . ' в объекте');
+        }
+    }
 }

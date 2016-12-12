@@ -3,11 +3,11 @@
  * @var City $city
  * @var Country $country
  */
-$creationDate = is_null($city->creationDate) ? null : DateTime::createFromFormat('Y-m-d', $city->creationDate);
+
 ?>
 Город: "<?= htmlspecialchars($city->name) ?>"<br>
 Население: <?= htmlspecialchars($city->population) ?> чел.<br>
-Дата создания: <?= is_null($creationDate) ? 'неизвестна' : htmlspecialchars($creationDate->format('d.m.Y')) ?><br>
+Дата создания: <?= !$city->creationDateObject ? 'неизвестна' : htmlspecialchars($city->creationDateObject->format('d.m.Y')) ?><br>
 Уровень безработицы: <?= $city->unemploymentRate * 100 ?>%<br>
 Страна: "<?= htmlspecialchars($city->getCountry()->name) ?>"<br>
 <br>
