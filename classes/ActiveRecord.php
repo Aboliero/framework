@@ -150,6 +150,12 @@ abstract class ActiveRecord
 
     public function __get($name)
     {
+        $methodName = 'get'. ucfirst($name);
+
+        if (method_exists($this, $methodName)) {
+            return call_user_func([$this, $methodName]);
+        }
+        
         if (in_array($name, static::getColumnNames())) {
             return null;
         }
@@ -159,6 +165,13 @@ abstract class ActiveRecord
 
     public function __set($name, $value)
     {
+        $methodName = 'set'. ucfirst($name);
+        if (method_exists($this, $methodName)) {
+            call_user_func([$this, $methodName], $value);
+
+            return;
+        }
+        
         if (in_array($name, static::getColumnNames())) {
             $this->$name = $value;
         } else {

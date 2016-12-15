@@ -23,6 +23,11 @@ $application = Application::getInstance();
 $application->autoloader = $autoloader;
 $application->configure($config);
 
+//$city = City::getById(1);
+//echo $city->country->name;
+
+//exit;
+
 $route = $application->urlManager->getCurrentRoute();
 
 $controller = $application->getController($route->controllerName);

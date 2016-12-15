@@ -9,6 +9,7 @@
  * @property $unemploymentRate float
  * @property $countryId int
  * @property DateTime|null $creationDateObject
+ * @property Country||null $country
  */
 class City extends ActiveRecord
 {
@@ -40,25 +41,5 @@ class City extends ActiveRecord
     public function setCreationDateObject($value)
     {
         $this->creationDate = $value ? $value->format('Y-m-d') : null;
-    }
-    
-    public function __get($name)
-    {
-        if ($name == 'creationDateObject') {
-            return $this->getCreationDateObject();
-        }
-        
-        return parent::__get($name);
-    }
-
-    public function __set($name, $value)
-    {
-        if ($name == 'creationDateObject') {
-            $this->setCreationDateObject($value);
-
-            return;
-        }
-        
-        parent::__set($name, $value);
     }
 }
