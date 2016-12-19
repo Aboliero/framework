@@ -42,4 +42,11 @@ class City extends ActiveRecord
     {
         $this->creationDate = $value ? $value->format('Y-m-d') : null;
     }
+
+    public function getFieldLabels()
+    {
+        return [
+            'name' => 'Название',
+        ];
+    }
 }

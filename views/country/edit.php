@@ -16,8 +16,8 @@
     <label for="capitalId">Столица</label><br>
     <select name="capitalId" id="capitalId">
         <?php foreach ($cities as $city) { ?>
-    <option <?= $city->id == $country->capitalId ? 'selected' : '' ?> value="<?= htmlspecialchars($city->id) ?>"><?= htmlspecialchars($city->name) ?></option> <!-- id - что посылает мащин. name - что видить чиляфек -->
-<?php } ?>
+            <option <?= $city->id == $country->capitalId ? 'selected' : '' ?> value="<?= htmlspecialchars($city->id) ?>"><?= htmlspecialchars($city->name) ?></option> <!-- id - что посылает мащин. name - что видить чиляфек -->
+        <?php } ?>
         <option value="">Не выбирать</option>
     </select>
     <br>

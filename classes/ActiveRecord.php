@@ -178,4 +178,9 @@ abstract class ActiveRecord
             throw new Exception('Не найдено свойство ' . $name . ' в объекте');
         }
     }
+
+    public function getFieldLabels()
+    {
+        return [];
+    }
 }

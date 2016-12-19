@@ -4,10 +4,11 @@ namespace controllers;
 use Exception;
 use Country;
 use Controller;
-use City;
+
 class CountryController extends \Controller
 {
     public $defaultActionName = 'list';
+    
     public function listAction()
     {
         $countries = Country::getObjects();
@@ -17,10 +18,11 @@ class CountryController extends \Controller
 
     public function viewAction()
     {
-        $country = Country::getById($_GET['id']);
         if (!isset($_GET['id']) || !$_GET['id']) {
             throw new Exception('Не выбрана страна');
         }
+
+        $country = Country::getById($_GET['id']);
 
         $this->render('view', ['country' => $country]);
     }
@@ -46,7 +48,7 @@ class CountryController extends \Controller
         }
 
         if (is_null($country)) {
-            throw new Exception('Не существует такого id города');
+            throw new Exception('Не существует такой страны');
         }
 
         $cities = $country->getCities();
@@ -59,8 +61,6 @@ class CountryController extends \Controller
         $country = new Country();
 
         if (isset($_POST['submit'])) {
-
-
             $country->name = $_POST['name'];
             $country->area = $_POST['area'];
             $country->capitalId = $_POST['capitalId'] == '' ? null : $_POST['capitalId'];
@@ -83,22 +83,21 @@ class CountryController extends \Controller
 
     public function deleteAction()
     {
-        $id = $_GET['id'];
-        $country = Country::getById($id);
-        $cities = $country->getCities();
+        $country = Country::getById($_GET['id']);
+        
         if (!$country) {
             throw new Exception('ААА!!! ЖОСТЬ! СТРАНЫ НЕТ!! ПИЗДА!');
         }
 
-
         if (isset($_POST['confirm'])) {
-            if ($cities) {
+            if ($country->getCities()) {
                 $this->app->flashMessages->add('ВНЕМАНИЕ!!! Чтобы удалить страну - ей не должен принадлежать ни один город!');
 
                 header('Location: /country/list');
 
                 exit;
             }
+            
             $country->delete();
             $this->app->flashMessages->add('ВНЕМАНИЕ!!! СТРАНА ' . $country->name . ' УДАЛЕНА!!!</strong>');
 
