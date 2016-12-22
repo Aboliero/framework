@@ -37,8 +37,6 @@ class CityController extends Controller
             throw new Exception('Не выбран город');
         }
 
-        $isSaved = false;
-
         $city = City::getById($_GET['id']);
 
         if (isset($_POST['submit'])) {
@@ -47,10 +45,19 @@ class CityController extends Controller
             $city->countryId = $_POST['countryId'] == '' ? null : $_POST['countryId'];
             $city->unemploymentRate = $_POST['unemploymentRate'] / 100;
             $city->creationDateObject = $_POST['creationDateObject'] == '' ? null : DateTime::createFromFormat('d.m.Y', $_POST['creationDateObject']);
-            $city->save();
-
-            $isSaved = true;
+            $isSaved = $city->save();
+            
+            if ($isSaved) {
+                $this->app->flashMessages->add('
+                    <strong>Сохранено</strong> <br>
+                ');
+            } else {
+                $this->app->flashMessages->add('
+                    <strong>Ошибка. Чот не так. Город не отредактирован.</strong> <br>
+                ');
+            }
         }
+
 
         if (is_null($city)) {
             throw new Exception('Не существует такого id города');
@@ -58,7 +65,7 @@ class CityController extends Controller
 
         $countries = Country::getObjects();
 
-        $this->render('edit', ['city' => $city, 'isSaved' => $isSaved, 'countries' => $countries]);
+        $this->render('edit', ['city' => $city, 'countries' => $countries]);
     }
 
        
@@ -74,16 +81,23 @@ class CityController extends Controller
             $city->countryId = $_POST['countryId'] == 'unselected' ? null : $_POST['countryId'];
             $city->creationDateObject = $_POST['creationDateObject'] == '' ? null : DateTime::createFromFormat('d.m.Y', $_POST['creationDateObject']);;
             $city->unemploymentRate = $_POST['unemploymentRate'] / 100;
-            $city->save();
+            $isSaved = $city->save();
 
-            $this->app->flashMessages->add('
-                <strong>ВНЕМАНИЕ!!! ГОРАД ДАБАВЛИН!!!</strong> <br>
-                <a href="/city/edit?id=' . $city->id . '">Редактировать новый город</a>
-            ');
 
-            header('Location: /city/list');
+            if ($isSaved) {
+                $this->app->flashMessages->add('
+                    <strong>ВНЕМАНИЕ!!! ГОРАД ДАБАВЛИН!!!</strong> <br>
+                    <a href="/city/edit?id=' . $city->id . '">Редактировать новый город</a>
+                ');
 
-            exit;
+                header('Location: /city/list');
+
+                exit;
+            } else {
+                $this->app->flashMessages->add('
+                    <strong>Ошибка. Чот не так. Город не сохранён.</strong> <br>
+                ');
+            }
         }
 
         $countries = Country::getObjects();

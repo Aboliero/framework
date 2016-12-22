@@ -87,8 +87,34 @@ abstract class ActiveRecord
         return null;
     }
 
+    public function getValidationRules()
+    {
+        return [];
+    }
+
+    public function isValid()
+    {
+        foreach ($this->getValidationRules() as $rule) {
+            $name = $rule['field'];
+            $params = isset($rule['params']) ? $rule['params'] : [];
+            $isValid = call_user_func([$rule['validator'], 'isValid'], $this->$name, $params);
+
+            if (!$isValid) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+
     public function save()
     {
+        if (!$this->isValid()) {
+            return false;
+        }
+        
         $database = Application::getInstance()->db;
         $fields = $this->getFields();
         $tableName = $database->escapeName($this->getTableName());
@@ -107,6 +133,8 @@ abstract class ActiveRecord
         }
         
         $this->oldId = $this->id;
+
+        return true;
     }
 
     /**

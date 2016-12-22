@@ -2,7 +2,7 @@
 /**
  * @var City $city
  * @var Country[] $countries
- * @var bool $isSaved
+ * @var 
  */
 
 
@@ -30,10 +30,6 @@ $form = new Form($city);
 
     <button type="submit" name="submit" value="1">Отправить</button> <!-- пame это ключ, value - значение -->
 <?= $form->close() ?>
-<?php if ($isSaved) { ?>
-    <strong>Сохранено</strong> <br>
-    
-<? } ?>
     
 <br>
 

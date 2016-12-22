@@ -49,4 +49,11 @@ class City extends ActiveRecord
             'name' => 'Название',
         ];
     }
+
+    public function getValidationRules()
+    {
+        return [
+            ['field' => 'name', 'validator' => \validators\EmptinessValidator::class, 'params' => ['not' => true]],
+        ];
+    }
 }
