@@ -4,12 +4,22 @@ namespace validators;
 
 class EmptinessValidator
 {
-    public static function isValid($value, $params = [])
+    public static function isValid($value, $params = [], \ActiveRecord $model)
     {
+        
         if (isset($params['not']) && $params['not']) {
-            return !empty($value);
+            $result = !empty($value);
+            if (!$result) {
+                $model->addErrorMessage('Значение пустое');
+            }
+            
+        } else {
+            $result = empty($value);
+            if (!$result) {
+                $model->addErrorMessage('Значение не пустое');
+            }
         }
         
-        return empty($value);
+        return $result;
     }
 }

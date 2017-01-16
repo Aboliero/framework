@@ -53,7 +53,7 @@ class CityController extends Controller
                 ');
             } else {
                 $this->app->flashMessages->add('
-                    <strong>Ошибка. Чот не так. Город не отредактирован.</strong> <br>
+                    <strong> Не сохранено: ' . join('<br>', $city->errorMessages) . '</strong> <br>
                 ');
             }
         }

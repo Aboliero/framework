@@ -9,6 +9,11 @@ abstract class ActiveRecord
     public $id;
 
     /**
+     * @var string[]
+     */
+    public $errorMessages;
+
+    /**
      * @var int
      */
     protected $oldId;
@@ -94,20 +99,17 @@ abstract class ActiveRecord
 
     public function isValid()
     {
+        $this->errorMessages = [];
+        $result = true;
+
         foreach ($this->getValidationRules() as $rule) {
             $name = $rule['field'];
             $params = isset($rule['params']) ? $rule['params'] : [];
-            $isValid = call_user_func([$rule['validator'], 'isValid'], $this->$name, $params);
-
-            if (!$isValid) {
-                return false;
-            }
+            $result = $result && call_user_func([$rule['validator'], 'isValid'], $this->$name, $params, $this);
         }
 
-        return true;
+        return $result;
     }
-
-
 
     public function save()
     {
@@ -210,5 +212,10 @@ abstract class ActiveRecord
     public function getFieldLabels()
     {
         return [];
+    }
+
+    public function addErrorMessage($message)
+    {
+        $this->errorMessages[] = $message;
     }
 }
