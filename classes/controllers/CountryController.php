@@ -77,8 +77,7 @@ class CountryController extends \Controller
             exit;
         }
 
-        $cities = $country->getCities();
-        $this->render('edit', ['cities' => $cities, 'isSaved' => false, 'country' => $country]);
+        $this->render('edit', ['isSaved' => false, 'country' => $country]);
     }
 
     public function deleteAction()

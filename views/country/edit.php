@@ -1,7 +1,6 @@
 <?php
 /**
  * @var Country $country
- * @var City[] $cities
  * @var bool $isSaved
  */
 
@@ -15,7 +14,7 @@
     <input name="citysum" id="citysum" value="<?= $country->citysum ?>"><br>
     <label for="capitalId">Столица</label><br>
     <select name="capitalId" id="capitalId">
-        <?php foreach ($cities as $city) { ?>
+        <?php foreach ($country->getCities() as $city) { ?>
             <option <?= $city->id == $country->capitalId ? 'selected' : '' ?> value="<?= htmlspecialchars($city->id) ?>"><?= htmlspecialchars($city->name) ?></option> <!-- id - что посылает мащин. name - что видить чиляфек -->
         <?php } ?>
         <option value="">Не выбирать</option>

@@ -23,9 +23,9 @@ $application = Application::getInstance();
 $application->autoloader = $autoloader;
 $application->configure($config);
 
-//$city = City::getById(1);
-//echo $city->country->name;
-
+//$country = Country::getObjects();
+//var_dump($country);
+//
 //exit;
 
 $route = $application->urlManager->getCurrentRoute();

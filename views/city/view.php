@@ -12,7 +12,9 @@
 Страна: "<?= htmlspecialchars($city->getCountry()->name) ?>"<br>
 <br>
 <br>
+<?php if ($this->app->user->isAuthenticated()) {?>
     <a href="/city/edit?id=<?= urlencode($city->id) ?>"><small>Редактировать</small></a> <br>
+<?php } ?>
 <br>
 <a href="/city/list">Вернуться к списку городов</a>
 <br>

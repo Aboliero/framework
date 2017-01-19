@@ -1,7 +1,7 @@
 <?php
 /**
  * @var City $city
- * @var Country[] $countries
+ * @var
  * @var 
  */
 
@@ -21,7 +21,7 @@ $form = new Form($city);
     <input name="unemploymentRate" id="unemploymentRate" value="<?= $city->unemploymentRate * 100 ?>"><br>
     <label for="countryId">Страна</label><br>
     <select name="countryId" id="countryId">
-        <?php foreach ($countries as $country) { ?>
+        <?php foreach ($city->getCountries() as $country) { ?>
             <option <?= $country->id == $city->countryId ? 'selected' : '' ?> value="<?= htmlspecialchars($country->id) ?>"><?= htmlspecialchars($country->name) ?></option> <!-- id - что посылает мащин. name - что видить чиляфек -->
         <?php } ?>
     </select>

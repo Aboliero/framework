@@ -63,9 +63,8 @@ class CityController extends Controller
             throw new Exception('Не существует такого id города');
         }
 
-        $countries = Country::getObjects();
 
-        $this->render('edit', ['city' => $city, 'countries' => $countries]);
+        $this->render('edit', ['city' => $city]);
     }
 
        

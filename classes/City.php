@@ -25,6 +25,14 @@ class City extends ActiveRecord
     {
         return Country::getById($this->countryId);
     }
+
+    /**
+     * @return Country[]
+     */
+    public function getCountries()
+    {
+        return Country::getObjects();
+    }
     
     /**
      * @return DateTime|null
