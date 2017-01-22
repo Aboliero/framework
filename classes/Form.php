@@ -53,4 +53,26 @@ class Form
         
         return '<label for="' . $name . '">' . $label . '</label>';
     }
+
+    /**
+     * @param $name
+     * @param $options ActiveRecord[]
+     * @param $id 
+     * @param string $identy  имя опшиона по свойства объекта
+     * @return string
+     */
+    public function select($name, $id, $identy, $options)
+    {
+        $body = [];
+        $head = '<select name="' . $name . '" id="' . $name . '">';
+        foreach ($options as $option) {
+            $value = $option->$id;
+            $optionName = $option->$identy;
+            $body[] = '<option ' . ($value == $this->model->$name ? 'selected ' : '') . 'value="' . $value . '">' . $optionName . '</option>';
+                }
+        $end = '</select>';
+
+        return $head . join('', $body) . $end;
+    }
 }
+/**  */

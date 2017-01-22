@@ -55,6 +55,9 @@ class City extends ActiveRecord
     {
         return [
             'name' => 'Название',
+            'population' => 'Население',
+            'unemploymentRate' => 'Уровень безработицы',
+            'countryId' => 'Страна',
         ];
     }
 
