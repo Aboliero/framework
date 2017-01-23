@@ -37,6 +37,12 @@ class Form
         return '<input name="' . htmlspecialchars($name) . '" id="' . htmlspecialchars($name) . '" value="' . htmlspecialchars($value) . '">';
     }
 
+    public function unemployInput($name)
+    {
+        $value = $this->model->$name;
+        return '<input name="' . htmlspecialchars($name) . '" id="' . htmlspecialchars($name) . '" value="' . htmlspecialchars($value)* 100 . '">';
+    }
+
     public function dateInput($name)
     {
         /** @var DateTime $date */
@@ -74,5 +80,9 @@ class Form
 
         return $head . join('', $body) . $end;
     }
+
+//    public function bottom()
+//    {
+//
+//    }
 }
-/**  */

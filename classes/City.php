@@ -58,6 +58,7 @@ class City extends ActiveRecord
             'population' => 'Население',
             'unemploymentRate' => 'Уровень безработицы',
             'countryId' => 'Страна',
+            'creationDateObject' => 'Дата создания'
         ];
     }
 

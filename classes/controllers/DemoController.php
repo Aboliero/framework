@@ -45,4 +45,9 @@ class DemoController extends Controller
         $city1->name = 'Moscow';
         $city1->save();
     }
+
+    public function jsTestAction()
+    {
+        $this->render('jsTest');
+    }
 }
