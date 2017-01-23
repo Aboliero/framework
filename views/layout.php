@@ -22,3 +22,6 @@
 <hr>
 <?php $widget = new UserPanelWidget($this->app); ?>
 <?= $widget->run() ?>
+
+<hr>
+<a href="/demo/jsTest">test</a>
