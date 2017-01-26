@@ -1,3 +1,9 @@
+<script
+    src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+    integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="
+    crossorigin="anonymous">
+</script>
+
 <?php
 /**
  * @var string $content
@@ -6,7 +12,7 @@
 ?>
 
 Меню:
-<a href="/city/list" style="margin-right: 15px">Список городов</a>
+<a href="/city/list" style="margin-right: 15px" class="cities">Список городов</a>
 <a href="/country/list" style="margin-right: 15px">Список стран</a>
 <a href="/">Главная страница</a>
 <hr>
