@@ -1,5 +1,5 @@
 <?php
-
+/** @var City $city */
 //include - для активных
 //require_once -  для объявлений
 use components\Autoloader;
@@ -23,8 +23,12 @@ $application = Application::getInstance();
 $application->autoloader = $autoloader;
 $application->configure($config);
 
-//$country = Country::getObjects();
-//var_dump($country);
+///** @var City $city */
+//
+//$city = City::getById('1');
+//$form = new Form($city);
+//
+//var_dump($form->select('countryId', $form->optionArr($city->getCountries(), 'id', 'name')));
 //
 //exit;
 

@@ -5,6 +5,7 @@
 
 
 $form = new Form($city);
+
 ?>
 
 <?= $form->open('post') ?>
@@ -17,7 +18,7 @@ $form = new Form($city);
     <?= $form->label('unemploymentRate') ?><br>
     <?= $form->unemployInput('unemploymentRate') ?> <br>
     <?= $form->label('countryId') ?><br>
-    <?= $form->select('countryId', 'id', 'name', $city->getCountries()) ?>
+    <?= $form->select('countryId', Helpers::getMap($city->getCountries(), 'id', 'name')) ?>
 
     <br>
     <br>

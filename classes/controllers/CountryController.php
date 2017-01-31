@@ -80,6 +80,13 @@ class CountryController extends \Controller
         $this->render('edit', ['isSaved' => false, 'country' => $country]);
     }
 
+    public function jsonGetAction()
+    {
+        $country = Country::getById($_GET['id']);
+
+        echo json_encode($country->getFields());
+    }
+
     public function deleteAction()
     {
         $country = Country::getById($_GET['id']);

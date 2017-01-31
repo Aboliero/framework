@@ -31,6 +31,21 @@ class CityController extends Controller
         $this->render('view', ['city' => $city]);
     }
 
+    /* Action для примера */
+    public function ajaxViewAction()
+    {
+        if (!isset($_GET['id']) || !$_GET['id']) {
+            throw new Exception('Не выбран город');
+        }
+
+        $city = City::getById($_GET['id']);
+        if (is_null($city)) {
+            throw new Exception('Не существует такого id города');
+        }
+
+        echo $this->simpleRender($this->getName() . '/view', ['city' => $city]);
+    }
+
     public function editAction()
     { 
         if (!isset($_GET['id']) || !$_GET['id']) {

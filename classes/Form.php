@@ -1,7 +1,5 @@
 <?php
 
-/*<input name="name" id="name" value="<?= $city->name ?>">
-**/
 class Form
 {
     /**
@@ -62,24 +60,24 @@ class Form
 
     /**
      * @param $name
-     * @param $options ActiveRecord[]
-     * @param $id 
-     * @param string $identy  имя опшиона по свойства объекта
+     * @param array $options
      * @return string
      */
-    public function select($name, $id, $identy, $options)
+    public function select($name, $options)
     {
+        $head = '<select name="' . htmlspecialchars($name) . '" id="' . htmlspecialchars($name) . '">';
         $body = [];
-        $head = '<select name="' . $name . '" id="' . $name . '">';
-        foreach ($options as $option) {
-            $value = $option->$id;
-            $optionName = $option->$identy;
-            $body[] = '<option ' . ($value == $this->model->$name ? 'selected ' : '') . 'value="' . $value . '">' . $optionName . '</option>';
-                }
+        $modelValue = $this->model->$name;
+        foreach ($options as $option => $text) {
+            $body[] = '<option ' . ($option == $modelValue ? 'selected ' : '') . 'value="' . htmlspecialchars($option) . '">' . htmlspecialchars($text) . '</option>';
+        }
         $end = '</select>';
 
         return $head . join('', $body) . $end;
     }
+
+    
+    
 
 //    public function bottom()
 //    {
